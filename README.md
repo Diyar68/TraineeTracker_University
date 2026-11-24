@@ -164,9 +164,9 @@ local synthetic replacements for the original company integrations.
 
 The commands below use a Bash-compatible shell.
 
-### Clone the portfolio branch
+### Clone the repository
 
-    git clone --branch portfolio-demo --single-branch https://github.com/Diyar68/TraineeTracker_University.git
+    git clone --branch main --single-branch https://github.com/Diyar68/TraineeTracker_University.git
     cd TraineeTracker_University
 
 The clone checks out the deployment branch directly.
@@ -199,7 +199,7 @@ cookies require HTTPS in the browser.
 The isolated deployment requires Demo__Enabled=true. It creates temporary
 databases and never opens the original development database.
 
-For Render, use the **portfolio-demo** branch, Docker runtime, repository-root
+For Render, use the **main** branch, Docker runtime, repository-root
 build context and **./Dockerfile**. Set the health check to **/healthz**.
 Kestrel binds to **0.0.0.0:10000**, and Render handles TLS termination and
 HTTP-to-HTTPS redirection.
@@ -240,7 +240,8 @@ administration, curriculum handling, feedback, planning, testing and integration
 My contribution focuses on the dashboard and learning progress visualization.
 Team authorship is retained in the source comments where present.
 
-The original project is preserved on **integration-team-v2**. The interactive
-portfolio deployment is maintained on **portfolio-demo**. Publication permissions,
+The collaborative university project forms the basis of this portfolio
+deployment. The active development and deployment branch is **main**.
+Publication permissions,
 including use of the retained company logos, have been confirmed by the project
 owner. The repository currently defines no open-source license.
