@@ -1,5 +1,6 @@
 namespace TraineeTracker.Models
 {
+    // Autor: Tarik Polat
     /// <summary>
     /// Feedback eines Trainees zu einer abgeschlossenen Lektion.
     /// </summary>

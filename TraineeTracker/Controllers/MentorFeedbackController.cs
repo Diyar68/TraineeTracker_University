@@ -5,6 +5,7 @@ using TraineeTracker.ViewModels;
 
 namespace TraineeTracker.Controllers;
 
+// Autor: Tarik Polat
 /// <summary>
 /// Regelt die Feedback-Seiten und Feedback-Aktionen für Mentoren und Admins.
 /// </summary>
@@ -13,6 +14,7 @@ public class MentorFeedbackController : Controller
 {
     private readonly DemoFeedbackService _feedbackService;
 
+    // Autor: Tarik Polat
     /// <summary>
     /// Erstellt den Controller mit dem Feedback-Service.
     /// </summary>
@@ -22,6 +24,7 @@ public class MentorFeedbackController : Controller
         _feedbackService = feedbackService;
     }
 
+    // Autor: Tarik Polat
     /// <summary>
     /// Ändert per AJAX ein Feedback aus Mentor-Sicht.
     /// </summary>
@@ -40,6 +43,7 @@ public class MentorFeedbackController : Controller
 
     [HttpPost]
     [ValidateAntiForgeryToken]
+    // Autor: Tarik Polat
     /// <summary>
     /// Löscht per AJAX ein Feedback aus Mentor-Sicht.
     /// </summary>

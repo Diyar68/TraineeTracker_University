@@ -5,6 +5,7 @@ using TraineeTracker.ViewModels;
 namespace TraineeTracker.UnitTests;
 
 /// <remarks>
+/// Codeownership: Diyar Altintas
 /// </remarks>
 public class LessonModalViewModelTests
 {

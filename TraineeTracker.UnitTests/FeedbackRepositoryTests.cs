@@ -11,6 +11,7 @@ namespace TraineeTracker.UnitTests;
 /// </summary>
 public class FeedbackRepositoryTests
 {
+    // Autor: Tarik Polat
     /// <summary>
     /// Prüft, dass das Löschen eines Feedbacks den Fortschritt von Bewertet
     /// zurück auf Akzeptiert setzt.

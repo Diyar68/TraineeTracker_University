@@ -1,3 +1,4 @@
+// Diyar
 using TraineeTracker.Data.Repositories;
 using TraineeTracker.Models;
 using TraineeTracker.ViewModels;
@@ -5,6 +6,7 @@ using TraineeTracker.ViewModels;
 namespace TraineeTracker.Services;
 
 /// <remarks>
+/// Codeownership: Diyar Altintas
 /// </remarks>
 public class DashboardService
 {
@@ -42,6 +44,7 @@ public class DashboardService
                 progress.FirstOrDefault(p => p.LectionId == l.Id)))
             .ToList();
 
+        // Codeownership: Florian Pausch (Anwesenheits-Verzahnung)
         var attendance = await _attendanceService.GetAttendedPersonDaysAsync(
             _currentUser.TraineeId,
             _currentUser.Email,

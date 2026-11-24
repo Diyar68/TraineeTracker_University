@@ -2,6 +2,7 @@ using TraineeTracker.Models;
 
 namespace TraineeTracker.Data.Repositories;
 
+// Autor: Tarik Polat
 /// <summary>
 /// Bündelt ein Feedback mit Fortschritt, Lektion und Trainee für die Anzeige.
 /// </summary>
@@ -20,6 +21,7 @@ public class FeedbackWithContext
     public User Trainee { get; set; } = null!;
 }
 
+// Autor: Tarik Polat
 /// <summary>
 /// Bündelt einen abgeschlossenen, aber noch nicht bewerteten Fortschritts-Eintrag mit seiner Lektion.
 /// </summary>
@@ -32,6 +34,7 @@ public class FinishedProgressInfo
     public Lection Lection { get; set; } = null!;
 }
 
+// Autor: Tarik Polat
 /// <summary>
 /// Kapselt den Datenbankzugriff für Feedback-Einträge.
 /// </summary>
@@ -39,6 +42,7 @@ public class FeedbackRepository
 {
     private readonly AppDbContext _context;
 
+    // Autor: Tarik Polat
     /// <summary>
     /// Erstellt das Repository mit dem Datenbankkontext.
     /// </summary>
@@ -48,11 +52,13 @@ public class FeedbackRepository
         _context = context;
     }
 
+    // Autor: Tarik Polat
     /// <summary>
     /// Gibt alle Feedback-Einträge zurück.
     /// </summary>
     public List<FeedbackWithContext> GetAll() => Query().ToList();
 
+    // Autor: Tarik Polat
     /// <summary>
     /// Gibt alle Feedback-Einträge eines Trainees zurück.
     /// </summary>
@@ -60,6 +66,7 @@ public class FeedbackRepository
     public List<FeedbackWithContext> GetForTrainee(string traineeId) =>
         Query().Where(x => x.Progress.TraineeId == traineeId).ToList();
 
+    // Autor: Tarik Polat
     /// <summary>
     /// Gibt alle Feedback-Einträge mehrerer Trainees zurück.
     /// </summary>
@@ -70,6 +77,7 @@ public class FeedbackRepository
         return Query().Where(x => ids.Contains(x.Progress.TraineeId)).ToList();
     }
 
+    // Autor: Tarik Polat
     /// <summary>
     /// Gibt alle Feedback-Einträge außer denen eines Trainees zurück.
     /// </summary>
@@ -77,6 +85,7 @@ public class FeedbackRepository
     public List<FeedbackWithContext> GetExcludingTrainee(string traineeId) =>
         Query().Where(x => x.Progress.TraineeId != traineeId).ToList();
 
+    // Autor: Tarik Polat
     /// <summary>
     /// Legt für eine akzeptierte Lektion ein neues Feedback an und setzt den Fortschritt auf "bewertet".
     /// </summary>
@@ -111,6 +120,7 @@ public class FeedbackRepository
         return GetById(feedback.Id);
     }
 
+    // Autor: Tarik Polat
     /// <summary>
     /// Legt ein leeres Feedback an, falls für den Fortschritt noch keins existiert.
     /// </summary>
@@ -131,6 +141,7 @@ public class FeedbackRepository
         _context.SaveChanges();
     }
 
+    // Autor: Tarik Polat
     /// <summary>
     /// Löscht das Feedback zu einem Lernfortschritt, falls vorhanden.
     /// </summary>
@@ -144,12 +155,14 @@ public class FeedbackRepository
         _context.SaveChanges();
     }
 
+    // Autor: Tarik Polat
     /// <summary>
     /// Sucht ein Feedback anhand seiner Id.
     /// </summary>
     /// <param name="feedbackId">Id des Feedbacks.</param>
     public FeedbackWithContext? GetById(int feedbackId) => Query().FirstOrDefault(x => x.Feedback.Id == feedbackId);
 
+    // Autor: Tarik Polat
     /// <summary>
     /// Übernimmt die Formulardaten in ein bestehendes Feedback.
     /// </summary>
@@ -173,6 +186,7 @@ public class FeedbackRepository
         return true;
     }
 
+    // Autor: Tarik Polat
     /// <summary>
     /// Löscht ein Feedback und setzt den zugehörigen Fortschritt bei Bedarf zurück auf "akzeptiert".
     /// </summary>
@@ -200,6 +214,7 @@ public class FeedbackRepository
         return reverted;
     }
 
+    // Autor: Tarik Polat
     /// <summary>
     /// Wandelt eine Schwierigkeits-Zahl in einen lesbaren Text um.
     /// </summary>
@@ -212,6 +227,7 @@ public class FeedbackRepository
         _ => "",
     };
 
+    // Autor: Tarik Polat
     /// <summary>
     /// Wandelt einen Schwierigkeits-Text in eine Zahl um.
     /// </summary>
@@ -224,6 +240,7 @@ public class FeedbackRepository
         _ => 0,
     };
 
+    // Autor: Tarik Polat
     /// <summary>
     /// Baut die Datenbankabfrage für Feedback mit allen zugehörigen Daten.
     /// </summary>

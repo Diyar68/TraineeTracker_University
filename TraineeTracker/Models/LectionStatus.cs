@@ -1,7 +1,9 @@
+// Diyar
 using System.ComponentModel.DataAnnotations;
 namespace TraineeTracker.Models
 {
     /// <remarks>
+    /// Codeownership: Diyar Altintas
     /// </remarks>
     public enum LectionStatus
     {

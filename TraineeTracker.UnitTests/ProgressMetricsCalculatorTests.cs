@@ -5,6 +5,7 @@ using TraineeTracker.ViewModels;
 namespace TraineeTracker.UnitTests;
 
 /// <summary>Tests für die Kennzahlen-Berechnung.</summary>
+/// <remarks>Codeownership: Florian Pausch</remarks>
 public class ProgressMetricsCalculatorTests
 {
     /// <summary>Prüft die Gewichtung je Lektionsstatus in DonePT/OpenPT.</summary>

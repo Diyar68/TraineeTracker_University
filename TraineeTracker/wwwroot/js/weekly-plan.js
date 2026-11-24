@@ -1,4 +1,6 @@
-
+/**
+ * Codeownership: Diyar Altintas
+ */
 /* ═══════════════════════════════════════════════════════
    WOCHENPLAN / KALENDER
    Serverseitig gerenderte Partial; JS steuert nur Navigation.

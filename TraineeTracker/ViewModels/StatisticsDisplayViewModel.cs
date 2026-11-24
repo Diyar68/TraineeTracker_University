@@ -25,6 +25,7 @@ public class StatisticsDisplayViewModel
     public bool IsApiAvailable { get; init; }
     public List<StatisticsStatusRowViewModel> StatusRows { get; init; } = new();
 
+    /// <remarks>Codeownership: Florian Pausch (IsApiAvailable-Mapping); Basisstruktur: Team03</remarks>
     public static StatisticsDisplayViewModel From(DashboardStats stats)
     {
         var totalPlanPt = stats.DonePT + stats.OpenPT;

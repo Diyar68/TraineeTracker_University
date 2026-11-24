@@ -1,9 +1,11 @@
+// Diyar
 using TraineeTracker.Models;
 
 namespace TraineeTracker.ViewModels
 {
     // ViewModels/TraineeDashboardViewModel.cs
     /// <remarks>
+    /// Codeownership: Diyar Altintas
     /// </remarks>
     public class TraineeDashboardViewModel
     {

@@ -1,0 +1,436 @@
+[
+  {
+    "id": 509332,
+    "title": "001 Web foundations – practice 1",
+    "url": "https://curriculum.example/lessons/509332",
+    "estimate": 0.0,
+    "deprecated": false
+  },
+  {
+    "id": 509333,
+    "title": "002 Linux essentials – practice 1",
+    "url": "https://curriculum.example/lessons/509333",
+    "estimate": 3.5,
+    "deprecated": false
+  },
+  {
+    "id": 509339,
+    "title": "003 Networking – practice 1",
+    "url": "https://curriculum.example/lessons/509339",
+    "estimate": 2.0,
+    "deprecated": false
+  },
+  {
+    "id": 511178,
+    "title": "004 C# programming – practice 1",
+    "url": "https://curriculum.example/lessons/511178",
+    "estimate": 1.0,
+    "deprecated": false
+  },
+  {
+    "id": 509414,
+    "title": "005 Relational databases – practice 1",
+    "url": "https://curriculum.example/lessons/509414",
+    "estimate": 1.0,
+    "deprecated": false
+  },
+  {
+    "id": 509415,
+    "title": "006 Web security – practice 1",
+    "url": "https://curriculum.example/lessons/509415",
+    "estimate": 1.0,
+    "deprecated": false
+  },
+  {
+    "id": 511179,
+    "title": "007 Automated testing – practice 1",
+    "url": "https://curriculum.example/lessons/511179",
+    "estimate": 2.0,
+    "deprecated": false
+  },
+  {
+    "id": 511330,
+    "title": "008 Container workflows – practice 1",
+    "url": "https://curriculum.example/lessons/511330",
+    "estimate": 0.5,
+    "deprecated": false
+  },
+  {
+    "id": 511181,
+    "title": "009 Web foundations – practice 2",
+    "url": "https://curriculum.example/lessons/511181",
+    "estimate": 0.5,
+    "deprecated": false
+  },
+  {
+    "id": 509341,
+    "title": "010 Linux essentials – practice 2",
+    "url": "https://curriculum.example/lessons/509341",
+    "estimate": 4.0,
+    "deprecated": false
+  },
+  {
+    "id": 511333,
+    "title": "011 Networking – practice 2",
+    "url": "https://curriculum.example/lessons/511333",
+    "estimate": 3.0,
+    "deprecated": false
+  },
+  {
+    "id": 509340,
+    "title": "012 C# programming – practice 2",
+    "url": "https://curriculum.example/lessons/509340",
+    "estimate": 2.0,
+    "deprecated": false
+  },
+  {
+    "id": 517382,
+    "title": "013 Relational databases – practice 2",
+    "url": "https://curriculum.example/lessons/517382",
+    "estimate": 2.0,
+    "deprecated": false
+  },
+  {
+    "id": 523491,
+    "title": "014 Web security – practice 2",
+    "url": "https://curriculum.example/lessons/523491",
+    "estimate": 1.0,
+    "deprecated": false
+  },
+  {
+    "id": 531475,
+    "title": "015 Automated testing – practice 2",
+    "url": "https://curriculum.example/lessons/531475",
+    "estimate": 0.5,
+    "deprecated": false
+  },
+  {
+    "id": 519412,
+    "title": "016 Container workflows – practice 2",
+    "url": "https://curriculum.example/lessons/519412",
+    "estimate": 2.5,
+    "deprecated": false
+  },
+  {
+    "id": 519439,
+    "title": "017 Web foundations – practice 3",
+    "url": "https://curriculum.example/lessons/519439",
+    "estimate": 1.5,
+    "deprecated": false
+  },
+  {
+    "id": 531501,
+    "title": "018 Linux essentials – practice 3",
+    "url": "https://curriculum.example/lessons/531501",
+    "estimate": 1.0,
+    "deprecated": false
+  },
+  {
+    "id": 509342,
+    "title": "019 Networking – practice 3",
+    "url": "https://curriculum.example/lessons/509342",
+    "estimate": 0.0,
+    "deprecated": false
+  },
+  {
+    "id": 513761,
+    "title": "020 C# programming – practice 3",
+    "url": "https://curriculum.example/lessons/513761",
+    "estimate": 2.0,
+    "deprecated": false
+  },
+  {
+    "id": 513768,
+    "title": "021 Relational databases – practice 3",
+    "url": "https://curriculum.example/lessons/513768",
+    "estimate": 1.0,
+    "deprecated": false
+  },
+  {
+    "id": 509343,
+    "title": "022 Web security – practice 3",
+    "url": "https://curriculum.example/lessons/509343",
+    "estimate": 3.0,
+    "deprecated": false
+  },
+  {
+    "id": 541193,
+    "title": "023 Automated testing – practice 3",
+    "url": "https://curriculum.example/lessons/541193",
+    "estimate": 4.0,
+    "deprecated": false
+  },
+  {
+    "id": 513764,
+    "title": "024 Container workflows – practice 3",
+    "url": "https://curriculum.example/lessons/513764",
+    "estimate": 2.0,
+    "deprecated": false
+  },
+  {
+    "id": 513769,
+    "title": "025 Web foundations – practice 4",
+    "url": "https://curriculum.example/lessons/513769",
+    "estimate": 4.0,
+    "deprecated": false
+  },
+  {
+    "id": 513771,
+    "title": "026 Linux essentials – practice 4",
+    "url": "https://curriculum.example/lessons/513771",
+    "estimate": 3.0,
+    "deprecated": false
+  },
+  {
+    "id": 509344,
+    "title": "027 Networking – practice 4",
+    "url": "https://curriculum.example/lessons/509344",
+    "estimate": 2.0,
+    "deprecated": false
+  },
+  {
+    "id": 509345,
+    "title": "028 C# programming – practice 4",
+    "url": "https://curriculum.example/lessons/509345",
+    "estimate": 0.25,
+    "deprecated": false
+  },
+  {
+    "id": 521546,
+    "title": "029 Relational databases – practice 4",
+    "url": "https://curriculum.example/lessons/521546",
+    "estimate": 2.0,
+    "deprecated": false
+  },
+  {
+    "id": 518037,
+    "title": "030 Web security – practice 4",
+    "url": "https://curriculum.example/lessons/518037",
+    "estimate": 1.0,
+    "deprecated": false
+  },
+  {
+    "id": 518038,
+    "title": "031 Automated testing – practice 4",
+    "url": "https://curriculum.example/lessons/518038",
+    "estimate": 1.5,
+    "deprecated": false
+  },
+  {
+    "id": 518039,
+    "title": "032 Container workflows – practice 4",
+    "url": "https://curriculum.example/lessons/518039",
+    "estimate": 2.0,
+    "deprecated": false
+  },
+  {
+    "id": 518048,
+    "title": "033 Web foundations – practice 5",
+    "url": "https://curriculum.example/lessons/518048",
+    "estimate": 3.0,
+    "deprecated": false
+  },
+  {
+    "id": 518116,
+    "title": "034 Linux essentials – practice 5",
+    "url": "https://curriculum.example/lessons/518116",
+    "estimate": 0.5,
+    "deprecated": false
+  },
+  {
+    "id": 523445,
+    "title": "035 Networking – practice 5",
+    "url": "https://curriculum.example/lessons/523445",
+    "estimate": 2.0,
+    "deprecated": false
+  },
+  {
+    "id": 518049,
+    "title": "036 C# programming – practice 5",
+    "url": "https://curriculum.example/lessons/518049",
+    "estimate": 0.5,
+    "deprecated": false
+  },
+  {
+    "id": 518053,
+    "title": "037 Relational databases – practice 5",
+    "url": "https://curriculum.example/lessons/518053",
+    "estimate": 0.5,
+    "deprecated": false
+  },
+  {
+    "id": 518055,
+    "title": "038 Web security – practice 5",
+    "url": "https://curriculum.example/lessons/518055",
+    "estimate": 2.0,
+    "deprecated": false
+  },
+  {
+    "id": 518118,
+    "title": "039 Automated testing – practice 5",
+    "url": "https://curriculum.example/lessons/518118",
+    "estimate": 1.5,
+    "deprecated": false
+  },
+  {
+    "id": 523470,
+    "title": "040 Container workflows – practice 5",
+    "url": "https://curriculum.example/lessons/523470",
+    "estimate": 3.0,
+    "deprecated": false
+  },
+  {
+    "id": 518547,
+    "title": "041 Web foundations – practice 6",
+    "url": "https://curriculum.example/lessons/518547",
+    "estimate": 1.0,
+    "deprecated": false
+  },
+  {
+    "id": 518302,
+    "title": "042 Linux essentials – practice 6",
+    "url": "https://curriculum.example/lessons/518302",
+    "estimate": 2.0,
+    "deprecated": false
+  },
+  {
+    "id": 523498,
+    "title": "043 Networking – practice 6",
+    "url": "https://curriculum.example/lessons/523498",
+    "estimate": 3.0,
+    "deprecated": false
+  },
+  {
+    "id": 518548,
+    "title": "044 C# programming – practice 6",
+    "url": "https://curriculum.example/lessons/518548",
+    "estimate": 1.0,
+    "deprecated": false
+  },
+  {
+    "id": 518583,
+    "title": "045 Relational databases – practice 6",
+    "url": "https://curriculum.example/lessons/518583",
+    "estimate": 0.5,
+    "deprecated": false
+  },
+  {
+    "id": 518584,
+    "title": "046 Web security – practice 6",
+    "url": "https://curriculum.example/lessons/518584",
+    "estimate": 0.5,
+    "deprecated": false
+  },
+  {
+    "id": 529098,
+    "title": "047 Automated testing – practice 6",
+    "url": "https://curriculum.example/lessons/529098",
+    "estimate": 0.5,
+    "deprecated": false
+  },
+  {
+    "id": 529135,
+    "title": "048 Container workflows – practice 6",
+    "url": "https://curriculum.example/lessons/529135",
+    "estimate": 1.5,
+    "deprecated": false
+  },
+  {
+    "id": 530542,
+    "title": "049 Web foundations – practice 7",
+    "url": "https://curriculum.example/lessons/530542",
+    "estimate": 4.0,
+    "deprecated": false
+  },
+  {
+    "id": 530782,
+    "title": "050 Linux essentials – practice 7",
+    "url": "https://curriculum.example/lessons/530782",
+    "estimate": 0.5,
+    "deprecated": false
+  },
+  {
+    "id": 530785,
+    "title": "051 Networking – practice 7",
+    "url": "https://curriculum.example/lessons/530785",
+    "estimate": 0.5,
+    "deprecated": false
+  },
+  {
+    "id": 530788,
+    "title": "052 C# programming – practice 7",
+    "url": "https://curriculum.example/lessons/530788",
+    "estimate": 1.5,
+    "deprecated": false
+  },
+  {
+    "id": 531979,
+    "title": "053 Relational databases – practice 7",
+    "url": "https://curriculum.example/lessons/531979",
+    "estimate": 0.25,
+    "deprecated": false
+  },
+  {
+    "id": 532001,
+    "title": "054 Web security – practice 7",
+    "url": "https://curriculum.example/lessons/532001",
+    "estimate": 0.5,
+    "deprecated": false
+  },
+  {
+    "id": 532014,
+    "title": "055 Automated testing – practice 7",
+    "url": "https://curriculum.example/lessons/532014",
+    "estimate": 0.25,
+    "deprecated": false
+  },
+  {
+    "id": 532026,
+    "title": "056 Container workflows – practice 7",
+    "url": "https://curriculum.example/lessons/532026",
+    "estimate": 0.5,
+    "deprecated": false
+  },
+  {
+    "id": 532024,
+    "title": "057 Web foundations – practice 8",
+    "url": "https://curriculum.example/lessons/532024",
+    "estimate": 0.5,
+    "deprecated": false
+  },
+  {
+    "id": 532029,
+    "title": "058 Linux essentials – practice 8",
+    "url": "https://curriculum.example/lessons/532029",
+    "estimate": 4.0,
+    "deprecated": false
+  },
+  {
+    "id": 532988,
+    "title": "059 Networking – practice 8",
+    "url": "https://curriculum.example/lessons/532988",
+    "estimate": 1.0,
+    "deprecated": false
+  },
+  {
+    "id": 533008,
+    "title": "060 C# programming – practice 8",
+    "url": "https://curriculum.example/lessons/533008",
+    "estimate": 0.5,
+    "deprecated": false
+  },
+  {
+    "id": 533169,
+    "title": "061 Relational databases – practice 8",
+    "url": "https://curriculum.example/lessons/533169",
+    "estimate": 0.5,
+    "deprecated": false
+  },
+  {
+    "id": 533179,
+    "title": "062 Web security – practice 8",
+    "url": "https://curriculum.example/lessons/533179",
+    "estimate": 2.0,
+    "deprecated": false
+  }
+]

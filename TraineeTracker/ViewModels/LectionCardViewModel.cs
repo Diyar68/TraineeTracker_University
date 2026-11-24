@@ -5,6 +5,7 @@ using TraineeTracker.Services;
 namespace TraineeTracker.ViewModels;
 
 /// <remarks>
+/// Codeownership: Diyar Altintas
 /// </remarks>
 public class LectionCardViewModel
 {

@@ -12,6 +12,7 @@ using TraineeTracker.Controllers;
 
 namespace TraineeTracker.UnitTests;
 
+// Joel Bitterlich Test für die Trainee-Auswahl und das Setzen des Cookies
 
 public class MentorControllerTests
 {

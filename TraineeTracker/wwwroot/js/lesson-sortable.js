@@ -1,10 +1,10 @@
+// Joel Bitterlich 
 // Skript für die Sortierung der Lektionen im Lehrplan. Nutzt die SortableJS Bibliothek.
 
 (function () {
     'use strict';
 
     function init() {
-        if (document.body.dataset.readOnly === 'true') return;
         const lists = document.querySelectorAll('.lessons-list');
         if (!lists || lists.length === 0) return;
 

@@ -1,8 +1,10 @@
+// Diyar
 using TraineeTracker.Models;
 
 namespace TraineeTracker.Services;
 
 /// <remarks>
+/// Codeownership: Diyar Altintas
 /// </remarks>
 public interface ILectionTransitionService
 {

@@ -6,6 +6,7 @@ using TraineeTracker.Models;
 namespace TraineeTracker.ViewModels;
 
 /// <remarks>
+/// Codeownership: Diyar Altintas
 /// </remarks>
 public class LessonModalViewModel
 {
@@ -34,7 +35,7 @@ public class LessonModalViewModel
             Title = lection.Title,
             EyebrowText = $"Lektion {lection.Number}",
             EffortText = $"{lection.Effort.ToString("0.#", CultureInfo.InvariantCulture)} PT",
-            ExternalLink = lection.ExternalLink,
+            ExternalLink = CurriculumLinks.ForDemo(lection.ExternalLink),
             Status = status.ToString().ToLowerInvariant(),
             StatusLabel = status.DisplayName(),
             MetaItems = BuildMetaItems(lection, progress),
@@ -110,6 +111,7 @@ public class LessonModalViewModel
 }
 
 /// <remarks>
+/// Codeownership: Diyar Altintas
 /// </remarks>
 public class LessonModalStatusNodeViewModel
 {
@@ -120,6 +122,7 @@ public class LessonModalStatusNodeViewModel
 }
 
 /// <remarks>
+/// Codeownership: Diyar Altintas
 /// </remarks>
 public class LessonModalTransitionViewModel
 {

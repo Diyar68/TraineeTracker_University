@@ -1,8 +1,10 @@
+// Diyar
 using TraineeTracker.Models;
 
 namespace TraineeTracker.ViewModels
 {
     /// <remarks>
+    /// Codeownership: Diyar Altintas
     /// </remarks>
     public class LectionWithProgress
     {

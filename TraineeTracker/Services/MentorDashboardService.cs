@@ -7,6 +7,7 @@ using TraineeTracker.ViewModels;
 
 namespace TraineeTracker.Services;
 
+// Joel Bitterlich ganzer Code
 
 // Baut die Mentor-Übersicht aus echten Datenbank-Daten auf. 
 // Mentoren sehen dabei nur ihre zugewiesenen Trainees,
@@ -46,6 +47,7 @@ public class MentorDashboardService
     private bool IsAdmin => string.Equals(Principal?.GetRole(), AppConstants.Roles.Admin, StringComparison.OrdinalIgnoreCase);
     private string? AuthenticatedUserId => Principal?.GetUserId();
     
+    // Joel Bitterlich baut das ViewModel für MentorDashboard auf
     public async Task<MentorDashboardViewModel> BuildMentorDashboardAsync()
     {
         var trainees = GetRelevantTrainees();
@@ -67,6 +69,7 @@ public class MentorDashboardService
         };
     }
 
+    // Joel Bitterlich ermittelt die zugewiseenen Trainees für Mentor und Admin alle Trainees
     private List<User> GetRelevantTrainees()
     {
         if (IsAdmin)
@@ -79,6 +82,7 @@ public class MentorDashboardService
         return _userRepository.GetTrainees().Where(t => assignedIds.Contains(t.Id)).ToList();
     }
 
+    // Joel Bitterlich baut die Trainee Übersicht Karte für das Dashboard auf
     private async Task<MentorTraineeCardViewModel> BuildTraineeCardAsync(User trainee, List<Lection> lections)
     {
         var progress = await _progressRepo.GetByTraineeIdAsync(trainee.Id);
@@ -113,6 +117,7 @@ public class MentorDashboardService
         };
     }
 
+    // Joel Bitterlich baut die Intialdaten für die Trainee Karte
     private static string BuildInitials(User user)
     {
         var first = user.FirstName.Length > 0 ? user.FirstName[..1] : "";

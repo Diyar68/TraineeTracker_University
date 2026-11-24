@@ -1,3 +1,4 @@
+// Diyar
 using Microsoft.AspNetCore.Mvc;
 using TraineeTracker.Data.Repositories;
 using TraineeTracker.Filters;
@@ -8,6 +9,7 @@ using TraineeTracker.ViewModels;
 namespace TraineeTracker.Controllers;
 
 /// <remarks>
+/// Codeownership: Diyar Altintas
 /// </remarks>
 [RequireDemoRole(AppConstants.RoleValues.Trainee, AppConstants.RoleValues.Mentor, AppConstants.RoleValues.Admin)]
 public class TraineeDashboardController : Controller

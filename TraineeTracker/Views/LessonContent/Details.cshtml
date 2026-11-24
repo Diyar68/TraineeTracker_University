@@ -1,0 +1,20 @@
+@model TraineeTracker.Models.Lection
+@{
+    ViewData["Title"] = Model.Title;
+}
+<section class="admin-shell">
+    <h1>@Model.Title</h1>
+    <p>Fiktive Übung für die isolierte Trainingsumgebung.</p>
+    <h2>Lernziele</h2>
+    <ul>
+        <li>Die wichtigsten Begriffe des Themas erklären.</li>
+        <li>Ein kleines Beispiel entwerfen und die einzelnen Schritte dokumentieren.</li>
+        <li>Das Ergebnis anhand eigener Tests überprüfen und mit dem Mentor besprechen.</li>
+    </ul>
+    <h2>Praxisaufgabe</h2>
+    <p>Erstelle zu diesem Thema eine minimale Beispielanwendung mit erfundenen Daten.
+       Beschreibe Ausgangslage, Vorgehen und Ergebnis. Notiere eine offene Frage für das Review.</p>
+    <p>Geplanter Aufwand: @Model.Effort PT. Reiche die Lektion im Dashboard zur Prüfung ein,
+       sobald deine Lösung und die Dokumentation bereit sind.</p>
+    <a asp-controller="TraineeDashboard" asp-action="Index">Zurück zum Dashboard</a>
+</section>

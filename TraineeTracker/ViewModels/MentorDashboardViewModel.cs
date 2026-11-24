@@ -2,7 +2,7 @@ using TraineeTracker.Models;
 
 namespace TraineeTracker.ViewModels;
 
-// Model für die Mentor-Übersicht ("Meine Trainees", neuestes Feedback)
+// Jeol Bitterlich Model Für die Mentor-Übersicht ("Meine Trainees", neuestes Feedback) 
 
 public class MentorDashboardViewModel
 {

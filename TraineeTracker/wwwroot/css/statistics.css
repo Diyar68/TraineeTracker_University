@@ -1,4 +1,4 @@
-
+/*Codeownership: Flrórian Pausch*/
 .stats-view { display: flex; flex-direction: column; gap: 24px; }
 .stats-header {
   display: flex; align-items: flex-end; justify-content: space-between;

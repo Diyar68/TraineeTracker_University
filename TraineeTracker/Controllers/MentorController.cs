@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
+// Joel Bitterlich 
 // Verwaltet die Aktionen die vom Mentor ausführbar sind. 
 // Da der Mentor noch im TraineeDashboard mit verankert ist, ist dieser Controller kleiner
 
@@ -8,6 +9,7 @@ namespace TraineeTracker.Controllers;
 [TraineeTracker.Filters.RequireDemoRole(AppConstants.RoleValues.Mentor, AppConstants.RoleValues.Admin)]
 public class MentorController : Controller
 {
+    // Joel Bitterlich
     // Setzt das Server-seitige Cookie für die Trainee-Auswahl des Mentors und leitet zur Dashboard weiter.
    
     [HttpPost]

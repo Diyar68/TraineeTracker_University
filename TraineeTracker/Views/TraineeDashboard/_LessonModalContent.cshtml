@@ -1,4 +1,6 @@
-
+@*
+    Codeownership: Diyar Altintas
+*@
 @model LessonModalViewModel
 
 <!-- Modal-Header -->
@@ -21,7 +23,7 @@
 <!-- Externer Link zum Card-Deck -->
 @if (!string.IsNullOrWhiteSpace(Model.ExternalLink))
 {
-    <a id="modal-ext-link" class="modal-ext-link" href="@Model.ExternalLink" target="_blank" rel="noopener noreferrer">
+    <a id="modal-ext-link" class="modal-ext-link" href="@TraineeTracker.Helpers.CurriculumLinks.ForDemo(Model.ExternalLink)" target="_blank" rel="noopener noreferrer">
         Lektion im Card-Deck öffnen ↗
     </a>
 }

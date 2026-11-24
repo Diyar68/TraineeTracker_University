@@ -200,7 +200,7 @@ public class MentorDashboardServiceTests
             Id = "trainee-1",
             FirstName = "Test",
             LastName = "Trainee",
-            Email = "test.trainee@portfolio.example",
+            Email = "test.trainee@example.org",
             PasswordHash = "hash",
             Role = AppConstants.Roles.Trainee,
             TraineeStartDate = new DateTime(2026, 1, 1),
@@ -255,7 +255,7 @@ public class MentorDashboardServiceTests
     {
         public string TraineeId { get; } = traineeId;
         public string DisplayName => "Test Trainee";
-        public string Email => "test.trainee@portfolio.example";
+        public string Email => "test.trainee@example.org";
         public DateTime TraineeStartDate => new(2026, 1, 1);
         public DateTime TraineeEndDate => new(2026, 12, 31);
     }

@@ -4,12 +4,13 @@ using TraineeTracker.ViewModels;
 namespace TraineeTracker.Services;
 
 /// <summary>Berechnet die sechs Kennzahlen der Fortschrittskontrolle.</summary>
+/// <remarks>Codeownership: Florian Pausch</remarks>
 public static class ProgressMetricsCalculator
 {
     /// <summary>Berechnet die vollständige Fortschrittsstatistik aus Lektionen mit Fortschritt.</summary>
     /// <param name="items">Alle Lektionen des Trainees mit Fortschritt.</param>
     /// <param name="attendedPT">Anwesenheit in PT, oder null bei API-Ausfall.</param>
-    /// <param name="isApiAvailable">Ob Anwesenheitsdaten verfügbar sind.</param>
+    /// <param name="isApiAvailable">Ob die makandra-API erreichbar war.</param>
     /// <returns>Die berechneten Kennzahlen als <see cref="DashboardStats"/>.</returns>
     public static DashboardStats Calculate(
         IReadOnlyCollection<LectionWithProgress> items,

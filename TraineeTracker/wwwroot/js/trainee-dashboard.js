@@ -1,4 +1,6 @@
-
+/**
+ * Codeownership: Diyar Altintas
+ */
 /* ═══════════════════════════════════════════════════════
    trainee-dashboard.js
    Verantwortung: PT-Info-Popover und gemeinsame UI-Timer.

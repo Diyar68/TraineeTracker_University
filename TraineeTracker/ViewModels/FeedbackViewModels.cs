@@ -1,5 +1,6 @@
 namespace TraineeTracker.ViewModels;
 
+// Autor: Tarik Polat
 /// <summary>
 /// Ein Feedback-Eintrag für die Anzeige in den Feedback-Listen.
 /// </summary>
@@ -36,6 +37,7 @@ public class FeedbackEntryViewModel
     public bool IsOwnFeedback { get; set; }
 }
 
+// Autor: Tarik Polat
 /// <summary>
 /// Daten aus dem AJAX-Formular zum Anlegen eines Feedbacks.
 /// </summary>
@@ -57,6 +59,7 @@ public class DashboardFeedbackCreateRequest
     public string? Comment { get; set; }
 }
 
+// Autor: Tarik Polat
 /// <summary>
 /// Daten aus dem AJAX-Formular zum Ändern eines Feedbacks.
 /// </summary>
@@ -75,6 +78,7 @@ public class DashboardFeedbackUpdateRequest
     public string? Comment { get; set; }
 }
 
+// Autor: Tarik Polat
 /// <summary>Data needed by the dashboard after feedback is deleted.</summary>
 public class FeedbackDeletionResult
 {

@@ -194,3 +194,7 @@ UpgradeLog*.htm
 
 _import_source/
 TraineeTracker_BACKUP_*/
+
+# Python regression-test artifacts
+__pycache__/
+*.pyc

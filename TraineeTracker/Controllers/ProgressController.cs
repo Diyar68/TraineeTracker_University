@@ -1,3 +1,4 @@
+// Diyar
 using System.Globalization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -12,6 +13,7 @@ using TraineeTracker.ViewModels;
 namespace TraineeTracker.Controllers;
 
 /// <remarks>
+/// Codeownership: Diyar Altintas
 /// </remarks>
 [RequireDemoRole(AppConstants.RoleValues.Trainee, AppConstants.RoleValues.Mentor, AppConstants.RoleValues.Admin)]
 public class ProgressController : Controller
@@ -59,6 +61,7 @@ public class ProgressController : Controller
     public async Task<IActionResult> Transition(
         [FromBody] TransitionRequest request)
     {
+        if (string.IsNullOrWhiteSpace(_currentUser.TraineeId)) return StatusCode(403);
         if (!Enum.TryParse<LectionStatus>(request.To, ignoreCase: true, out var toStatus))
             return BadRequest(new { error = "Ungültiger Zielstatus." });
 

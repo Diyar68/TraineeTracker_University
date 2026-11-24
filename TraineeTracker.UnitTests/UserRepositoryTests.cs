@@ -20,8 +20,8 @@ public class UserRepositoryTests
                 Id = "1",
                 FirstName = "Manfred",
                 LastName = "Mental",
-                Email = "manfred@portfolio.example",
-                PasswordHash = "fixture-unused-hash",
+                Email = "manfred@demo.example",
+                PasswordHash = "123",
                 Role = "Mentor",
                 IsClosed = false
             },
@@ -30,8 +30,8 @@ public class UserRepositoryTests
                 Id = "2",
                 FirstName = "Hans",
                 LastName = "Hilfreich",
-                Email = "hans@portfolio.example",
-                PasswordHash = "fixture-unused-hash",
+                Email = "hans@demo.example",
+                PasswordHash = "123",
                 Role = "Mentor",
                 IsClosed = true
             },
@@ -40,8 +40,8 @@ public class UserRepositoryTests
                 Id = "3",
                 FirstName = "Admin",
                 LastName = "",
-                Email = "admin@portfolio.example",
-                PasswordHash = "fixture-unused-hash",
+                Email = "admin@demo.example",
+                PasswordHash = "123",
                 Role = "Admin",
                 IsClosed = false
             });
@@ -58,6 +58,7 @@ public class UserRepositoryTests
         Assert.Equal("Manfred", mentors[0].FirstName);
     }
 
+    // Autor: Tarik Polat
     /// <summary>
     /// Prüft, dass GetTrainees() gesperrte Trainee-Konten nicht zurückgibt.
     /// </summary>
@@ -73,8 +74,8 @@ public class UserRepositoryTests
                 Id = "10",
                 FirstName = "Theo",
                 LastName = "Trainee",
-                Email = "theo@portfolio.example",
-                PasswordHash = "fixture-unused-hash",
+                Email = "theo@demo.example",
+                PasswordHash = "123",
                 Role = "Trainee",
                 IsClosed = false
             },
@@ -83,8 +84,8 @@ public class UserRepositoryTests
                 Id = "11",
                 FirstName = "Clara",
                 LastName = "Closed",
-                Email = "clara@portfolio.example",
-                PasswordHash = "fixture-unused-hash",
+                Email = "clara@demo.example",
+                PasswordHash = "123",
                 Role = "Trainee",
                 IsClosed = true
             },
@@ -93,8 +94,8 @@ public class UserRepositoryTests
                 Id = "12",
                 FirstName = "Manfred",
                 LastName = "Mental",
-                Email = "manfred2@portfolio.example",
-                PasswordHash = "fixture-unused-hash",
+                Email = "manfred2@demo.example",
+                PasswordHash = "123",
                 Role = "Mentor",
                 IsClosed = false
             });
@@ -120,10 +121,10 @@ public class UserRepositoryTests
         context.Users.Add(new User
         {
             Id = "1",
-            FirstName = "Alex",
-            LastName = "Beispiel",
-            Email = "alex.beispiel@portfolio.example",
-            PasswordHash = "fixture-unused-hash",
+            FirstName = "Vanessa",
+            LastName = "Vital",
+            Email = "vanessa.vital@demo.example",
+            PasswordHash = "123",
             Role = "Trainee"
         });
 
@@ -132,7 +133,7 @@ public class UserRepositoryTests
         var repository = new UserRepository(context);
 
         // Act
-        var exists = repository.EmailExists("alex.beispiel@portfolio.example");
+        var exists = repository.EmailExists("vanessa.vital@demo.example");
 
         // Assert
         Assert.True(exists);

@@ -1,4 +1,6 @@
+/* Fonts: League Spartan (headings) + Open Sans (body/ui) — offizielle makandra CD */
 
+@import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@700&family=Open+Sans:wght@300..800&family=Source+Code+Pro&display=swap');
 
 :root {
     --licorice: #141210;

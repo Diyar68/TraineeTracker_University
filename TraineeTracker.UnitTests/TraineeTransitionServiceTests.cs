@@ -4,6 +4,7 @@ using TraineeTracker.Services;
 namespace TraineeTracker.UnitTests;
 
 /// <remarks>
+/// Codeownership: Diyar Altintas
 /// </remarks>
 public class TraineeTransitionServiceTests
 {

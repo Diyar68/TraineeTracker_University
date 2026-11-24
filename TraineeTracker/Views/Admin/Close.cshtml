@@ -20,7 +20,7 @@ else
                 <h3>@Model.FullName</h3>
                 <div class="meta-row">@Model.Email</div>
             </div>
-            <span class="role-badge demo@portfolio.example()">@Model.Role</span>
+            <span class="role-badge role-@Model.Role.ToLower()">@Model.Role</span>
         </div>
         @if (Model.IsClosed)
         {

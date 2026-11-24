@@ -1,9 +1,11 @@
+// Diyar
 using TraineeTracker.Models;
 using TraineeTracker.Helpers;
 
 namespace TraineeTracker.Services;
 
 /// <remarks>
+/// Codeownership: Diyar Altintas
 /// </remarks>
 public class LectionTransitionService : ILectionTransitionService
 {
@@ -53,6 +55,7 @@ public class LectionTransitionService : ILectionTransitionService
 
     public List<object> GetAvailableTransitions(LectionStatus from, bool isMentor)
     {
+        // Joel Bitterlich für Mentoren alle Statuswechsel anzeigen
         if (isMentor)
         {
             return Enum.GetValues<LectionStatus>()
@@ -92,6 +95,7 @@ public class LectionTransitionService : ILectionTransitionService
         return transition.TraineeAllowed;
     }
 
+    // Joel Bitterlich für Mentor das richtige Label
     private static string GetMentorLabel(LectionStatus from, LectionStatus to)
     {
         return to switch
@@ -107,6 +111,7 @@ public class LectionTransitionService : ILectionTransitionService
         };
     }
 
+// Joel Bitterlich für Mentor das richtige Icon
     private static string GetMentorIcon(LectionStatus to)
     {
         return to switch

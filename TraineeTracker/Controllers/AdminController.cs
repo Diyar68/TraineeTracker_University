@@ -8,6 +8,7 @@ using TraineeTracker.ViewModels;
 
 namespace TraineeTracker.Controllers;
 
+// Autor: Tarik Polat
 /// <summary>
 /// Steuert das Admin-Cockpit zur Benutzerverwaltung.
 /// </summary>
@@ -18,6 +19,7 @@ public class AdminController : Controller
     private readonly MentorAssignmentRepository _mentorAssignmentRepository;
     private readonly ILectionProgressRepository _progressRepository;
 
+    // Autor: Tarik Polat
     /// <summary>
     /// Erstellt den Controller mit den benötigten Repositories.
     /// </summary>
@@ -34,6 +36,7 @@ public class AdminController : Controller
         _progressRepository = progressRepository;
     }
 
+    // Autor: Tarik Polat
     /// <summary>
     /// Zeigt die Liste aller Benutzer.
     /// </summary>
@@ -50,6 +53,7 @@ public class AdminController : Controller
         return View(users);
     }
 
+    // Autor: Tarik Polat
     /// <summary>
     /// Zeigt das Formular zum Anlegen eines neuen Benutzers.
     /// </summary>
@@ -61,6 +65,7 @@ public class AdminController : Controller
 
     [HttpPost]
     [ValidateAntiForgeryToken]
+    // Autor: Tarik Polat
     /// <summary>
     /// Speichert einen neuen Benutzer aus dem Formular.
     /// </summary>
@@ -106,6 +111,7 @@ public class AdminController : Controller
         return RedirectToAction(nameof(Index));
     }
 
+    // Autor: Tarik Polat
     /// <summary>
     /// Zeigt das Formular zum Bearbeiten eines Benutzers.
     /// </summary>
@@ -137,6 +143,7 @@ public class AdminController : Controller
 
     [HttpPost]
     [ValidateAntiForgeryToken]
+    // Autor: Tarik Polat
     /// <summary>
     /// Speichert die Änderungen an einem Benutzer. Die Rolle kann dabei nicht geändert werden.
     /// </summary>
@@ -190,6 +197,7 @@ public class AdminController : Controller
         return RedirectToAction(nameof(Index));
     }
 
+    // Autor: Tarik Polat
     /// <summary>
     /// Zeigt die Seite zum Sperren oder Wiedereröffnen eines Kontos.
     /// </summary>
@@ -216,6 +224,7 @@ public class AdminController : Controller
 
     [HttpPost, ActionName("Close")]
     [ValidateAntiForgeryToken]
+    // Autor: Tarik Polat
     /// <summary>
     /// Sperrt oder öffnet ein Konto nach der Bestätigung.
     /// </summary>
@@ -231,6 +240,7 @@ public class AdminController : Controller
         return RedirectToAction(nameof(Index));
     }
 
+    // Autor: Tarik Polat
     /// <summary>
     /// Setzt Titel und Eyebrow-Text für die Seite.
     /// </summary>
@@ -241,12 +251,19 @@ public class AdminController : Controller
         ViewData["Eyebrow"] = $"{User.GetRole()} | {User.GetFullName()}";
     }
 
+    // Autor: Tarik Polat
     /// <summary>
     /// Prüft die Trainee-Felder wie Start- und Enddatum.
     /// </summary>
     /// <param name="vm">Die zu prüfenden Formulardaten.</param>
     private void ValidateRoleFields(UserFormViewModel vm)
     {
+        if (vm.Role is not (AppConstants.Roles.Trainee or AppConstants.Roles.Mentor or AppConstants.Roles.Admin))
+            ModelState.AddModelError(nameof(vm.Role), "Ungültige Benutzerrolle.");
+        var mentorIds = LoadMentorOptions().Select(mentor => mentor.Id).ToHashSet();
+        if (vm.AssignedMentorIds.Any(id => !mentorIds.Contains(id)))
+            ModelState.AddModelError(nameof(vm.AssignedMentorIds), "Ungültige Mentor-Zuordnung.");
+
         if (vm.Role != AppConstants.Roles.Trainee) return;
 
         if (vm.TraineeStartDate == null)
@@ -259,6 +276,7 @@ public class AdminController : Controller
             ModelState.AddModelError(nameof(vm.TraineeEndDate), "Das Enddatum muss nach dem Startdatum liegen.");
     }
 
+    // Autor: Tarik Polat
     /// <summary>
     /// Prüft das Passwort auf Pflichtangabe und Mindestlänge.
     /// </summary>
@@ -278,6 +296,7 @@ public class AdminController : Controller
         }
     }
 
+    // Autor: Tarik Polat
     /// <summary>
     /// Lädt die Liste der auswählbaren Mentoren.
     /// </summary>
@@ -286,6 +305,7 @@ public class AdminController : Controller
             .Select(m => new MentorOptionViewModel { Id = m.Id, FullName = m.FullName })
             .ToList();
 
+    // Autor: Tarik Polat
     /// <summary>
     /// Wandelt einen Benutzer in ein Anzeige-ViewModel für die Liste um.
     /// </summary>

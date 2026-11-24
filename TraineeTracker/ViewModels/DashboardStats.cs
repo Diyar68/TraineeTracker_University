@@ -8,9 +8,11 @@ namespace TraineeTracker.ViewModels
         public int RatedCount { get; init; }      // Fortschrittswert: accepted + rated
         public int ProgressPercent { get; init; }  // 0–100
 
+        /// <remarks>Codeownership: Florian Pausch</remarks>
         public decimal? AttendedPT { get; init; }    // null, wenn Zeiterfassung nicht berechenbar ist
         public decimal DonePT { get; init; }    // gewichteter Fortschritt nach Status
         public decimal OpenPT { get; init; }    // relevanter Lehrplan minus DonePT
+        /// <remarks>Codeownership: Florian Pausch</remarks>
         public bool IsApiAvailable { get; init; } = true;
         public decimal? BufferPT { get; init; }
         public decimal? VelocityPercent { get; init; }

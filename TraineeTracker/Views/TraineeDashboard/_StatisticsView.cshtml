@@ -13,7 +13,7 @@
                 <h2 class="stats-title">Statistik</h2>
             </div>
             <div class="stats-note">
-                Die Werte verwenden dieselbe PT-Berechnung wie das PT-Konto. Anwesend kommt aus der Arbeitszeit-API.
+                Die Werte verwenden dieselbe PT-Berechnung wie das PT-Konto. Anwesend verwendet lokale synthetische Arbeitszeitdaten.
             </div>
         </div>
 
@@ -28,7 +28,7 @@
             <div class="stats-card">
                 <span>Anwesend</span>
                 <strong id="stats-attended">@display.AttendedText</strong>
-                <small>Fiktive Anwesenheitsdaten</small>
+                <small>Synthetische Arbeitszeitdaten</small>
             </div>
             <div class="stats-card">
                 <span>Geschafft</span>
@@ -116,7 +116,7 @@
                                 {
                                     <div class="stats-status-row">
                                         <span>@row.Label</span>
-                                        <strong id="demo@portfolio.example">@row.Count</strong>
+                                        <strong id="stats-status-@row.CssKey">@row.Count</strong>
                                     </div>
                                 }
                             </div>

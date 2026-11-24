@@ -35,7 +35,7 @@
                 <tr>
                     <td><strong>@user.FullName</strong></td>
                     <td>@user.Email</td>
-                    <td><span class="role-badge demo@portfolio.example()">@user.Role</span></td>
+                    <td><span class="role-badge role-@user.Role.ToLower()">@user.Role</span></td>
                     <td>
                         @if (user.Role == AppConstants.Roles.Trainee)
                         {
@@ -77,7 +77,7 @@
                     <tr class="row-closed">
                         <td><strong>@user.FullName</strong></td>
                         <td>@user.Email</td>
-                        <td><span class="role-badge demo@portfolio.example()">@user.Role</span></td>
+                        <td><span class="role-badge role-@user.Role.ToLower()">@user.Role</span></td>
                         <td>
                             @if (user.Role == AppConstants.Roles.Trainee)
                             {

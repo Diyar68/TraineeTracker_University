@@ -3,10 +3,11 @@ using TraineeTracker.Data.Repositories;
 using TraineeTracker.Models;
 using TraineeTracker.Services;
 
+// Joel Bitterlich für die Individuelle Speicherung der Lektionen Rheifenfolge
 
 namespace TraineeTracker.Controllers;
 
-[TraineeTracker.Filters.RequireDemoRole(AppConstants.RoleValues.Trainee)]
+[TraineeTracker.Filters.RequireDemoRole(AppConstants.RoleValues.Trainee, AppConstants.RoleValues.Mentor, AppConstants.RoleValues.Admin)]
 [Route("[controller]/[action]")]
 public class TeachingplanController : Controller
 {
@@ -21,6 +22,7 @@ public class TeachingplanController : Controller
         _currentUser = currentUser;
     }
 
+    // Joel Bitterlich Sortierung der Lektionen 
     // pro Trainee mithilfe von IndividualOrderIndex
     public class OrderItemDto
     {
@@ -29,6 +31,7 @@ public class TeachingplanController : Controller
         public int? orderIndex { get; set; }
     }
 
+    // Joel Bitterlich Speichert die individuelle Reihenfolge der Lektionen
     //  pro Trainee mithilfe von IndividualOrderIndex
 
     [HttpPost]

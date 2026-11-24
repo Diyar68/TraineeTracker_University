@@ -85,7 +85,7 @@
                                 @if (!string.IsNullOrWhiteSpace(lesson.ExternalLink))
                                 {
                                     <span> · </span>
-                                    <a class="cards-deck-link" href="@lesson.ExternalLink" target="_blank" rel="noopener">
+                                    <a class="cards-deck-link" href="@TraineeTracker.Helpers.CurriculumLinks.ForDemo(lesson.ExternalLink)" target="_blank" rel="noopener">
                                         Cards-Deck
                                     </a>
                                 }

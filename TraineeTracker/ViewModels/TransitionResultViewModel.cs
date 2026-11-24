@@ -1,9 +1,11 @@
+// Diyar
 using TraineeTracker.Helpers;
 using TraineeTracker.Models;
 
 namespace TraineeTracker.ViewModels;
 
 /// <remarks>
+/// Codeownership: Diyar Altintas
 /// </remarks>
 public class TransitionResultViewModel
 {

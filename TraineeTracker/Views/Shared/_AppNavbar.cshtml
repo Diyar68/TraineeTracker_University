@@ -1,4 +1,6 @@
-
+@*
+    Codeownership: Diyar Altintas
+*@
 @model string
 @using System.Security.Claims
 
@@ -31,7 +33,7 @@
 ═══════════════════════════════════════════════════════ -->
 <nav class="topnav">
     <a class="nav-logo" asp-controller="@landingController" asp-action="Index">
-        <span class="login-app-name">Trainee Tracker</span>
+        <img src="~/img/makandra_word_white_color_rgb.svg" alt="makandra" class="nav-logo-img" />
     </a>
 
     <div class="nav-pill">
@@ -91,6 +93,9 @@
                 <div class="nav-avatar">@authenticatedInitials</div>
                 <span>@authenticatedDisplayName</span>
             </div>
+            <form asp-controller="Account" asp-action="ResetDemo" method="post" class="logout-form">
+                <button type="submit" class="nav-login-btn">Demo zurücksetzen</button>
+            </form>
             <form asp-controller="Account" asp-action="Logout" method="post" class="logout-form">
                 <button type="submit" class="nav-login-btn">Abmelden</button>
             </form>

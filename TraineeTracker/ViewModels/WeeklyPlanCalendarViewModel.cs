@@ -1,6 +1,7 @@
 namespace TraineeTracker.ViewModels;
 
 /// <remarks>
+/// Codeownership: Diyar Altintas
 /// </remarks>
 public class WeeklyPlanViewModel
 {
@@ -12,6 +13,7 @@ public class WeeklyPlanViewModel
 }
 
 /// <remarks>
+/// Codeownership: Diyar Altintas
 /// </remarks>
 public class WeeklyPlanWeekViewModel
 {
@@ -20,6 +22,7 @@ public class WeeklyPlanWeekViewModel
 }
 
 /// <remarks>
+/// Codeownership: Diyar Altintas
 /// </remarks>
 public class WeeklyPlanDayViewModel
 {
@@ -41,6 +44,7 @@ public class WeeklyPlanDayViewModel
 }
 
 /// <remarks>
+/// Codeownership: Diyar Altintas
 /// </remarks>
 public class WeeklyPlanEntryViewModel
 {

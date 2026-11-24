@@ -4,6 +4,7 @@
     <TargetFramework>net10.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>traineetracker-team03-demo</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -26,6 +27,11 @@
     <None Remove="Tests\**\*" />
   </ItemGroup>
 
-
+  <ItemGroup>
+    <None Update="Data\Seed\lehrplan_devop.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </None>
+  </ItemGroup>
 
 </Project>

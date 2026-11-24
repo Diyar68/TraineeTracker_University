@@ -11,6 +11,7 @@ using TraineeTracker.ViewModels;
 
 namespace TraineeTracker.Controllers;
 
+// Autor: Tarik Polat
 /// <summary>
 /// Regelt die Feedback-Seiten und Feedback-Aktionen für Trainees.
 /// </summary>
@@ -28,6 +29,7 @@ public class FeedbackController : Controller
     private readonly ICompositeViewEngine _viewEngine;
     private readonly ITempDataProvider _tempDataProvider;
 
+    // Autor: Tarik Polat
     /// <summary>
     /// Erstellt den Controller mit den benötigten Services und Repositories.
     /// </summary>
@@ -65,6 +67,7 @@ public class FeedbackController : Controller
         _tempDataProvider = tempDataProvider;
     }
 
+    // Autor: Tarik Polat
     /// <summary>
     /// Legt per AJAX ein neues Feedback für eine akzeptierte Lektion an.
     /// </summary>
@@ -85,6 +88,7 @@ public class FeedbackController : Controller
         return Ok(new { feedback, transition });
     }
 
+    // Autor: Tarik Polat
     /// <summary>
     /// Ändert per AJAX ein bestehendes eigenes Feedback.
     /// </summary>
@@ -101,6 +105,7 @@ public class FeedbackController : Controller
         return Ok(new { feedback = updated });
     }
 
+    // Autor: Tarik Polat
     /// <summary>
     /// Löscht per AJAX ein eigenes Feedback.
     /// </summary>
@@ -116,6 +121,7 @@ public class FeedbackController : Controller
         return Ok(new { deletion = result, transition });
     }
 
+    // Autor: Tarik Polat
     /// <summary>
     /// Baut das Ergebnis für die Anzeige nach einem Statuswechsel zusammen.
     /// </summary>
@@ -159,6 +165,7 @@ public class FeedbackController : Controller
             modalContentHtml);
     }
 
+    // Autor: Tarik Polat
     /// <summary>
     /// Gibt das Enddatum für die Anwesenheitsberechnung zurück.
     /// </summary>
@@ -170,6 +177,7 @@ public class FeedbackController : Controller
             : today;
     }
 
+    // Autor: Tarik Polat
     /// <summary>
     /// Rendert eine Partial View als HTML-Text.
     /// </summary>

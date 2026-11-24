@@ -5,6 +5,7 @@ using TraineeTracker.Services;
 namespace TraineeTracker.UnitTests;
 
 /// <remarks>
+/// Codeownership: Diyar Altintas
 /// </remarks>
 public class DashboardServiceTests
 {
@@ -65,7 +66,7 @@ public class DashboardServiceTests
     {
         public string TraineeId { get; } = traineeId;
         public string DisplayName => "Test Trainee";
-        public string Email => "test@portfolio.example";
+        public string Email => "test@example.org";
         public DateTime TraineeStartDate => new(2026, 1, 1);
         public DateTime TraineeEndDate => new(2026, 12, 31);
     }

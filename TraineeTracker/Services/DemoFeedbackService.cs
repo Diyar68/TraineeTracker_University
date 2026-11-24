@@ -7,6 +7,7 @@ using TraineeTracker.ViewModels;
 
 namespace TraineeTracker.Services;
 
+// Autor: Tarik Polat
 /// <summary>
 /// Baut die Feedback-Ansichten für Trainee, Mentor und Admin auf.
 /// </summary>
@@ -19,6 +20,7 @@ public class DemoFeedbackService
     private readonly ICurrentUserService _currentUser;
     private readonly IHttpContextAccessor _httpContextAccessor;
 
+    // Autor: Tarik Polat
     /// <summary>
     /// Erstellt den Service mit den benötigten Repositories.
     /// </summary>
@@ -56,6 +58,7 @@ public class DemoFeedbackService
     /// <summary>Gibt an, ob der angemeldete Benutzer Mentor ist.</summary>
     private bool IsMentor => string.Equals(Principal?.GetRole(), AppConstants.Roles.Mentor, StringComparison.OrdinalIgnoreCase);
 
+    // Autor: Tarik Polat
     /// <summary>
     /// Baut alle Feedback-Daten für das Dashboard zusammen.
     /// </summary>
@@ -78,18 +81,21 @@ public class DemoFeedbackService
         };
     }
 
+    // Autor: Tarik Polat
     /// <summary>
     /// Gibt das eigene Feedback des Trainees zurück.
     /// </summary>
     public List<FeedbackEntryViewModel> GetOwnFeedback() =>
         _feedbackRepo.GetForTrainee(_currentUser.TraineeId).Select(x => ToViewModel(x, isOwn: true)).ToList();
 
+    // Autor: Tarik Polat
     /// <summary>
     /// Gibt das Feedback aller anderen Trainees zurück.
     /// </summary>
     public List<FeedbackEntryViewModel> GetOthersFeedback() =>
         _feedbackRepo.GetExcludingTrainee(_currentUser.TraineeId).Select(x => ToViewModel(x, isOwn: false)).ToList();
 
+    // Autor: Tarik Polat
     /// <summary>
     /// Gibt das Feedback der zugewiesenen Trainees zurück, Admins sehen alles.
     /// </summary>
@@ -105,6 +111,7 @@ public class DemoFeedbackService
         return _feedbackRepo.GetForTrainees(traineeIds).Select(x => ToViewModel(x, isOwn: false)).ToList();
     }
 
+    // Autor: Tarik Polat
     /// <summary>
     /// Legt Feedback für die eigene Lektion anhand der Lektions-Id an.
     /// </summary>
@@ -122,6 +129,7 @@ public class DemoFeedbackService
         return result == null ? null : ToViewModel(result, isOwn: true);
     }
 
+    // Autor: Tarik Polat
     /// <summary>
     /// Sucht eigenes Feedback anhand der Feedback-Id.
     /// </summary>
@@ -133,6 +141,7 @@ public class DemoFeedbackService
         return ToViewModel(match, isOwn: true);
     }
 
+    // Autor: Tarik Polat
     /// <summary>
     /// Ändert ein eigenes Feedback.
     /// </summary>
@@ -148,6 +157,7 @@ public class DemoFeedbackService
         return _feedbackRepo.UpdateFromForm(feedbackId, difficulty, priorKnowledge, effort, comment);
     }
 
+    // Autor: Tarik Polat
     /// <summary>
     /// Löscht ein eigenes Feedback.
     /// </summary>
@@ -159,6 +169,7 @@ public class DemoFeedbackService
         return BuildDeletionResult(existing);
     }
 
+    // Autor: Tarik Polat
     /// <summary>
     /// Sucht Feedback für die Mentor-Ansicht, wenn der Trainee zugewiesen ist.
     /// </summary>
@@ -171,6 +182,7 @@ public class DemoFeedbackService
         return ToViewModel(match, isOwn: false);
     }
 
+    // Autor: Tarik Polat
     /// <summary>
     /// Ändert Feedback aus Mentor-Sicht.
     /// </summary>
@@ -187,6 +199,7 @@ public class DemoFeedbackService
         return _feedbackRepo.UpdateFromForm(feedbackId, difficulty, priorKnowledge, effort, comment);
     }
 
+    // Autor: Tarik Polat
     /// <summary>
     /// Löscht Feedback aus Mentor-Sicht.
     /// </summary>
@@ -199,6 +212,7 @@ public class DemoFeedbackService
         return BuildDeletionResult(existing);
     }
 
+    // Autor: Tarik Polat
     /// <summary>
     /// Löscht das Feedback und baut das Ergebnis für die Anzeige.
     /// </summary>
@@ -213,6 +227,7 @@ public class DemoFeedbackService
         };
     }
 
+    // Autor: Tarik Polat
     /// <summary>
     /// Wandelt ein Feedback mit Kontext in ein Anzeige-ViewModel um.
     /// </summary>

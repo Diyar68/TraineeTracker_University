@@ -1,6 +1,7 @@
 using TraineeTracker.ViewModels;
 
 namespace TraineeTracker.UnitTests;
+/// <remarks>Codeownership: Florian Pausch</remarks>
 public class StatisticsDisplayViewModelTests
 {
     [Fact]

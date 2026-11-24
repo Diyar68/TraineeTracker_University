@@ -7,6 +7,7 @@ using TraineeTracker.Models;
 using TraineeTracker.Services;
 
 
+// Joel Bitterlich Test der Individuellen Speicherung der Lektionen pro Trainee mithilfe von IndividualOrderIndex
 namespace TraineeTracker.UnitTests;
 
 public class TeachingplanControllerTests
@@ -67,7 +68,7 @@ public class TeachingplanControllerTests
     {
         public string TraineeId => traineeId;
         public string DisplayName => "Test Trainee";
-        public string Email => "trainee@portfolio.example";
+        public string Email => "trainee@example.com";
         public DateTime TraineeStartDate => DateTime.Today;
         public DateTime TraineeEndDate => DateTime.Today.AddYears(1);
     }

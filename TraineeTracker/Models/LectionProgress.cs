@@ -1,7 +1,9 @@
+// Diyar
 namespace TraineeTracker.Models
 {
     // Models/LectionProgress.cs
     /// <remarks>
+    /// Codeownership: Diyar Altintas
     /// </remarks>
     public class LectionProgress
     {

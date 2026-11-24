@@ -2,6 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace TraineeTracker.ViewModels;
 
+// Autor: Tarik Polat
 /// <summary>
 /// Ein Benutzer für die Anzeige in der Benutzerliste.
 /// </summary>
@@ -32,6 +33,7 @@ public class UserListItemViewModel
     public List<string> AssignedMentorNames { get; set; } = new();
 }
 
+// Autor: Tarik Polat
 /// <summary>
 /// Formulardaten zum Anlegen oder Bearbeiten eines Benutzers.
 /// </summary>
@@ -80,6 +82,7 @@ public class UserFormViewModel
     public bool IsNew => string.IsNullOrEmpty(Id);
 }
 
+// Autor: Tarik Polat
 /// <summary>
 /// Ein auswählbarer Mentor für die Mentor-Zuordnung.
 /// </summary>
@@ -92,6 +95,7 @@ public class MentorOptionViewModel
     public string FullName { get; set; } = "";
 }
 
+// Autor: Tarik Polat
 /// <summary>
 /// Daten für die Seite zum Sperren oder Wiedereröffnen eines Kontos.
 /// </summary>

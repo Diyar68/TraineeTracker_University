@@ -1,4 +1,3 @@
-@inject TraineeTracker.Services.DemoMode Demo
 @model LoginViewModel
 
 @{
@@ -8,29 +7,30 @@
 <div class="login-page">
     <div class="login-card">
         <div class="login-brand">
-            <span class="login-app-name">Trainee Tracker</span>
+            <img src="~/img/makandra_word_white_color_rgb.svg" alt="makandra" class="login-logo" />
             <span class="login-app-name">TraineeTracker</span>
         </div>
 
         <h1 class="login-title">Anmelden</h1>
+        <details class="login-sub">
+            <summary>Demo-Zugänge und Daten zurücksetzen</summary>
+            <p>Trainee: trainee@demo.example / TraineeDemo!2026</p>
+            <p>Mentor: mentor@demo.example / MentorDemo!2026</p>
+            <p>Administrator: admin@demo.example / AdminDemo!2026</p>
+            <p>Jeder Browser erhält einen eigenen Datenbestand für bis zu zwei Stunden.
+               Bitte ausschließlich fiktive Daten eingeben.</p>
+            <form asp-action="ResetDemo" method="post">
+                <button class="btn btn-primary" type="submit">Demo-Daten zurücksetzen</button>
+            </form>
+        </details>
         <p class="login-sub">Melde dich mit deinen Zugangsdaten an.</p>
 
-        @if (Demo.Enabled)
-        {
-            <p>Lesende Portfolio-Demo mit fiktiven Beispieldaten.</p>
-            <form asp-action="DemoLogin" method="post">
-                <button class="btn btn-primary" name="role" value="trainee">Trainee-Demo</button>
-                <button class="btn btn-primary" name="role" value="mentor">Mentor-Demo</button>
-            </form>
-        }
-        else
-        {
         <form asp-controller="Account" asp-action="Login" method="post" class="login-form" novalidate>
             <div asp-validation-summary="ModelOnly" class="message danger login-summary"></div>
 
             <div class="mb-3">
                 <label class="form-label" asp-for="Email">E-Mail</label>
-                <input class="form-control" asp-for="Email" type="email" autocomplete="username" placeholder="demo@portfolio.example" />
+                <input class="form-control" asp-for="Email" type="email" autocomplete="username" placeholder="trainee@demo.example" />
                 <span asp-validation-for="Email" class="text-invalid"></span>
             </div>
 
@@ -42,7 +42,6 @@
 
             <button type="submit" class="btn btn-primary login-submit">Anmelden</button>
         </form>
-        }
     </div>
 </div>
 

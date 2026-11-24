@@ -6,6 +6,7 @@ using TraineeTracker.ViewModels;
 namespace TraineeTracker.Services;
 
 /// <remarks>
+/// Codeownership: Diyar Altintas
 /// </remarks>
 public class WeeklyPlanService
 {

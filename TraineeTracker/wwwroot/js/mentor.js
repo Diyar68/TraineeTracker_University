@@ -1,4 +1,5 @@
 
+// Joel Bitterlich Menor Dashboard JS
 
 const MENTOR_TRAINEE_KEY = 'traineeTracker.mentorTrainee';
 const MENTOR_TRAINEE_STORAGE_KEY = MENTOR_TRAINEE_KEY;
@@ -27,6 +28,7 @@ function initMentorDashboard() {
 }
 
 
+// Joel Bitterlich Mentor Sidebar Scroll Funktion
 
 function initMentorSidebarScroll() {
     const sidebar = document.getElementById('mentor-sidebar') || document.querySelector('.mentor-side-nav');
@@ -118,15 +120,18 @@ function clearMentorTraineeCookie() {
 
 // Funktionen für die Naviagtion auf der Mentor Seite 
 
+// Joel Bitterlich zum Trainee springen  
 
 function scrollToTrainees() {
     document.getElementById('trainees-section')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
+// Joel Bitterlich zum Lehrplan springen
 function scrollToCurriculum() {
     document.getElementById('curriculum-section')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
+// Joel Bitterlich zum Feedback springen
 function scrollToFeedback() {
     document.getElementById('feedback-section')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }

@@ -2,6 +2,7 @@ using TraineeTracker.Models;
 
 namespace TraineeTracker.Data.Repositories;
 
+// Autor: Tarik Polat
 /// <summary>
 /// Kapselt den Datenbankzugriff für die Zuordnung von Mentoren zu Trainees.
 /// </summary>
@@ -9,6 +10,7 @@ public class MentorAssignmentRepository
 {
     private readonly AppDbContext _context;
 
+    // Autor: Tarik Polat
     /// <summary>
     /// Erstellt das Repository mit dem Datenbankkontext.
     /// </summary>
@@ -18,6 +20,7 @@ public class MentorAssignmentRepository
         _context = context;
     }
 
+    // Autor: Tarik Polat
     /// <summary>
     /// Gibt die Ids der Mentoren eines Trainees zurück.
     /// </summary>
@@ -28,6 +31,7 @@ public class MentorAssignmentRepository
             .Select(a => a.MentorId)
             .ToList();
 
+    // Autor: Tarik Polat
     /// <summary>
     /// Gibt die Ids der Trainees eines Mentors zurück.
     /// </summary>
@@ -38,6 +42,7 @@ public class MentorAssignmentRepository
             .Select(a => a.TraineeId)
             .ToList();
 
+    // Autor: Tarik Polat
     /// <summary>
     /// Prüft, ob ein Trainee einem Mentor zugewiesen ist.
     /// </summary>
@@ -49,6 +54,7 @@ public class MentorAssignmentRepository
         return _context.TraineeMentorAssignments.Any(a => a.TraineeId == traineeId && a.MentorId == mentorId);
     }
 
+    // Autor: Tarik Polat
     /// <summary>
     /// Liefert für jeden Trainee die Namen seiner zugewiesenen Mentoren.
     /// </summary>
@@ -62,6 +68,7 @@ public class MentorAssignmentRepository
                 g => g.Select(x => x.IsClosed ? $"{x.FirstName} {x.LastName} (geschlossen)" : $"{x.FirstName} {x.LastName}").ToList());
     }
 
+    // Autor: Tarik Polat
     /// <summary>
     /// Setzt die Mentoren eines Trainees neu.
     /// </summary>

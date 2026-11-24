@@ -18,6 +18,7 @@ public class AccountController : Controller
         _userRepository = userRepository;
     }
 
+    [HttpGet]
     public IActionResult Login()
     {
         if (User.Identity?.IsAuthenticated == true)
@@ -33,32 +34,8 @@ public class AccountController : Controller
     [HttpPost]
     [ValidateAntiForgeryToken]
     [Microsoft.AspNetCore.RateLimiting.EnableRateLimiting("login")]
-    public async Task<IActionResult> DemoLogin(string role)
-    {
-        if (!HttpContext.RequestServices.GetRequiredService<DemoMode>().Enabled) return NotFound();
-        var id = role switch { "trainee" => "demo-trainee", "mentor" => "demo-mentor", _ => null };
-        if (id == null) return BadRequest();
-        var user = _userRepository.GetById(id);
-        if (user == null || user.IsClosed) return StatusCode(503);
-        var claims = new[] {
-            new Claim(ClaimTypes.NameIdentifier, user.Id), new Claim(ClaimTypes.Name, user.FullName),
-            new Claim(ClaimTypes.Email, user.Email), new Claim(ClaimTypes.GivenName, user.FirstName),
-            new Claim(ClaimTypes.Surname, user.LastName), new Claim(ClaimTypes.Role, user.Role) };
-        await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
-            new ClaimsPrincipal(new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme)),
-            new AuthenticationProperties { IsPersistent = false, ExpiresUtc = DateTimeOffset.UtcNow.AddHours(1) });
-        Response.Cookies.Append(AppConstants.Cookies.Role, role,
-            new CookieOptions { HttpOnly = true, Secure = !HttpContext.RequestServices.GetRequiredService<IWebHostEnvironment>().IsDevelopment(), SameSite = SameSiteMode.Lax });
-        Response.Cookies.Delete(AppConstants.Cookies.MentorTrainee);
-        return Redirect("/TraineeDashboard");
-    }
-
-    [HttpPost]
-    [Microsoft.AspNetCore.RateLimiting.EnableRateLimiting("login")]
-    [ValidateAntiForgeryToken]
     public async Task<IActionResult> Login(LoginViewModel vm)
     {
-        if (HttpContext.RequestServices.GetRequiredService<DemoMode>().Enabled) return StatusCode(403);
         ViewData["Title"] = "Anmelden";
 
         if (!ModelState.IsValid)
@@ -88,6 +65,7 @@ public class AccountController : Controller
             new(ClaimTypes.GivenName, user.FirstName),
             new(ClaimTypes.Surname, user.LastName),
             new(ClaimTypes.Role, user.Role),
+            new("sandbox", ((DemoSessionStore.Session)HttpContext.Items[DemoSessionStore.ItemName]!).Id),
         };
 
         var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
@@ -95,7 +73,7 @@ public class AccountController : Controller
 
         // Rein kosmetisches Cookie für die Anzeige/Umschaltung in den Views.
         // Für Berechtigungen zählt ausschließlich das signierte Auth-Cookie oben.
-        Response.Cookies.Append(AppConstants.Cookies.Role, user.Role.ToLowerInvariant(), new CookieOptions { MaxAge = TimeSpan.FromDays(365) });
+        Response.Cookies.Append(AppConstants.Cookies.Role, user.Role.ToLowerInvariant(), new CookieOptions { MaxAge = DemoSessionStore.Lifetime });
         Response.Cookies.Delete(AppConstants.Cookies.MentorTrainee);
 
         return Redirect(RequireDemoRoleAttribute.LandingUrlFor(user.Role));
@@ -110,5 +88,21 @@ public class AccountController : Controller
         Response.Cookies.Delete(AppConstants.Cookies.MentorTrainee);
         return RedirectToAction(nameof(Login));
     }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> ResetDemo()
+    {
+        var session = (DemoSessionStore.Session)HttpContext.Items[DemoSessionStore.ItemName]!;
+        session.Expires = DateTimeOffset.UtcNow;
+        await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+        Response.Cookies.Delete(DemoSessionStore.CookieName);
+        Response.Cookies.Delete(AppConstants.Cookies.Role);
+        Response.Cookies.Delete(AppConstants.Cookies.MentorTrainee);
+        return RedirectToAction(nameof(Login));
+    }
+
+    [HttpGet]
+    public IActionResult Error() => Problem("The request could not be completed.", statusCode: 500);
 
 }
