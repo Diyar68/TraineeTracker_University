@@ -1,0 +1,65 @@
+@model TraineeTracker.ViewModels.UserFormViewModel
+
+<div class="mb-3">
+    <label class="form-label" asp-for="FirstName">Vorname</label>
+    <input class="form-control" asp-for="FirstName">
+    <span asp-validation-for="FirstName" class="text-invalid"></span>
+</div>
+<div class="mb-3">
+    <label class="form-label" asp-for="LastName">Nachname</label>
+    <input class="form-control" asp-for="LastName">
+    <span asp-validation-for="LastName" class="text-invalid"></span>
+</div>
+<div class="mb-3">
+    <label class="form-label" asp-for="Email">E-Mail</label>
+    <input class="form-control" asp-for="Email" type="email">
+    <span asp-validation-for="Email" class="text-invalid"></span>
+</div>
+<div class="mb-3">
+    <label class="form-label" asp-for="Password">@(Model.IsNew ? "Passwort" : "Neues Passwort (optional)")</label>
+    <input class="form-control" asp-for="Password" type="password" autocomplete="new-password">
+    <span asp-validation-for="Password" class="text-invalid"></span>
+</div>
+<div class="mb-3">
+    <label class="form-label" asp-for="Role">Rolle</label>
+    <select class="form-select" asp-for="Role" id="roleSelect" disabled="@(!Model.IsNew)">
+        <option value="@AppConstants.Roles.Trainee">Trainee</option>
+        <option value="@AppConstants.Roles.Mentor">Mentor</option>
+        <option value="@AppConstants.Roles.Admin">Admin</option>
+    </select>
+    @if (!Model.IsNew)
+    {
+        <input type="hidden" asp-for="Role" />
+    }
+    <span asp-validation-for="Role" class="text-invalid"></span>
+</div>
+
+<div id="traineeFields" style="display:none;">
+    <div class="mb-3">
+        <label class="form-label" asp-for="TraineeStartDate">Startdatum</label>
+        <input class="form-control" asp-for="TraineeStartDate" type="date">
+        <span asp-validation-for="TraineeStartDate" class="text-invalid"></span>
+    </div>
+    <div class="mb-3">
+        <label class="form-label" asp-for="TraineeEndDate">Enddatum</label>
+        <input class="form-control" asp-for="TraineeEndDate" type="date">
+        <span asp-validation-for="TraineeEndDate" class="text-invalid"></span>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Mentoren</label>
+        <div class="mentor-checklist">
+            @foreach (var mentor in Model.AvailableMentors)
+            {
+                <label class="mentor-check-item">
+                    <input type="checkbox"
+                           name="AssignedMentorIds"
+                           value="@mentor.Id"
+                           @(Model.AssignedMentorIds.Contains(mentor.Id) ? "checked" : "")>
+                    @mentor.FullName
+                </label>
+            }
+        </div>
+    </div>
+</div>
+
+

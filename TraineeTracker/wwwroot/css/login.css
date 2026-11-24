@@ -1,0 +1,106 @@
+/* ═══════════════════════════════════════════════════════
+   login.css
+   Eigenständige, ganzseitige Login-Ansicht. Nutzt die
+   Marken-Variablen aus site.css (--licorice, --pink, ...).
+═══════════════════════════════════════════════════════ */
+
+.login-page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--licorice);
+    background-image: radial-gradient(circle at 15% 15%, rgba(255, 8, 68, .18), transparent 45%),
+                       radial-gradient(circle at 85% 85%, rgba(255, 177, 153, .12), transparent 45%);
+    padding: 32px 16px;
+}
+
+.login-card {
+    width: 100%;
+    max-width: 420px;
+    background: #1e1e1e;
+    border: 1px solid #2e2e2e;
+    border-top: 4px solid var(--pink);
+    padding: 36px 32px 32px;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, .35);
+    color: #ffffff;
+}
+
+.login-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 28px;
+}
+
+.login-logo {
+    height: 22px;
+    width: auto;
+}
+
+.login-app-name {
+    font-weight: 700;
+    color: #ffffff;
+    border-left: 1px solid #3a3a3a;
+    padding-left: 12px;
+}
+
+.login-title {
+    font-size: 1.8rem;
+    margin: 0 0 4px;
+}
+
+.login-sub {
+    color: #a0a0a0;
+    margin: 0 0 24px;
+}
+
+.login-form .mb-3 {
+    margin-bottom: 16px;
+}
+
+.login-form .form-label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: .9rem;
+}
+
+.login-form .form-control {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid var(--grey2);
+    font-size: 1rem;
+    box-sizing: border-box;
+}
+
+.login-form .form-control:focus {
+    outline: none;
+    border-color: var(--pink);
+    box-shadow: 0 0 0 3px rgba(255, 8, 68, .15);
+}
+
+.login-summary {
+    display: none;
+    background: rgba(217, 54, 54, .14);
+    border-color: #d93636;
+    color: #ffb3b3;
+}
+
+.login-summary:has(li) {
+    display: block;
+    margin-bottom: 18px;
+}
+
+.login-summary ul {
+    margin: 0;
+    padding-left: 18px;
+}
+
+.login-submit {
+    width: 100%;
+    padding: 11px 0;
+    border: 0;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-top: 4px;
+}

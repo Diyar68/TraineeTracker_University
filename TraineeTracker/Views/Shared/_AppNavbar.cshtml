@@ -1,0 +1,110 @@
+
+@model string
+@using System.Security.Claims
+
+@{
+    var controller = ViewContext.RouteData.Values["controller"]?.ToString() ?? "";
+    var action = ViewContext.RouteData.Values["action"]?.ToString() ?? "";
+    var isDashboard = controller == "TraineeDashboard";
+    var isAdmin = controller == "Admin";
+    var isImport = controller == "CurriculumImport";
+    var demoRole = Model == AppConstants.RoleValues.Mentor
+        ? AppConstants.RoleValues.Mentor
+        : Model == AppConstants.RoleValues.Admin
+            ? AppConstants.RoleValues.Admin
+            : AppConstants.RoleValues.Trainee;
+    var landingController = demoRole == AppConstants.RoleValues.Admin ? "Admin" : "TraineeDashboard";
+    var authenticatedDisplayName = Context.User.Identity?.Name;
+    if (string.IsNullOrWhiteSpace(authenticatedDisplayName))
+    {
+        authenticatedDisplayName = $"{Context.User.FindFirstValue(ClaimTypes.GivenName)} {Context.User.FindFirstValue(ClaimTypes.Surname)}".Trim();
+    }
+    var displayParts = (authenticatedDisplayName ?? "")
+        .Split(' ', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+    var authenticatedInitials = displayParts.Length > 0
+        ? string.Concat(displayParts.Take(2).Select(part => part[0])).ToUpperInvariant()
+        : "?";
+}
+
+<!-- ═══════════════════════════════════════════════════════
+     NAV
+═══════════════════════════════════════════════════════ -->
+<nav class="topnav">
+    <a class="nav-logo" asp-controller="@landingController" asp-action="Index">
+        <span class="login-app-name">Trainee Tracker</span>
+    </a>
+
+    <div class="nav-pill">
+        @if (isDashboard)
+        {
+            @if (demoRole == AppConstants.RoleValues.Mentor || demoRole == AppConstants.RoleValues.Admin)
+            {
+                @if (demoRole == AppConstants.RoleValues.Admin)
+                {
+                    <a asp-controller="Admin" asp-action="Index" data-visible-roles="admin">Benutzerverwaltung</a>
+                }
+                <a onclick="showMentorOverview(); return false;" class="active" data-view-link="mentor"
+                   data-visible-roles="mentor">Mentor</a>
+                <a onclick="switchView('lehrplan', this); return false;" class="" data-view-link="lehrplan"
+                   data-visible-roles="mentor" data-requires-mentor-selection="true">Lehrplan</a>
+                <a onclick="switchView('wochenplan', this); return false;" class="" data-view-link="wochenplan"
+                   data-visible-roles="mentor" data-requires-mentor-selection="true">Wochenplan</a>
+                <a onclick="switchView('statistik', this); return false;" class="" data-view-link="statistik"
+                   data-visible-roles="mentor" data-requires-mentor-selection="true">Statistik</a>
+                <a onclick="switchView('feedback', this); return false;" class="" data-view-link="feedback"
+                   data-visible-roles="mentor" data-requires-mentor-selection="true">Feedback</a>
+                <a asp-controller="CurriculumImport" asp-action="Index" data-visible-roles="mentor admin">Lehrplan importieren</a>
+            }
+            else
+            {
+                <a onclick="switchView('lehrplan', this); return false;" class="active" data-view-link="lehrplan"
+                   data-visible-roles="trainee">Lehrplan</a>
+                <a onclick="switchView('wochenplan', this); return false;" class="" data-view-link="wochenplan"
+                   data-visible-roles="trainee">Wochenplan</a>
+                <a onclick="switchView('statistik', this); return false;" class="" data-view-link="statistik"
+                   data-visible-roles="trainee">Statistik</a>
+                <a onclick="switchView('feedback', this); return false;" class="" data-view-link="feedback"
+                   data-visible-roles="trainee">Feedback</a>
+            }
+        }
+        else if (demoRole == AppConstants.RoleValues.Admin)
+        {
+            <a class="@(isAdmin ? "active" : "")" asp-controller="Admin" asp-action="Index">Benutzerverwaltung</a>
+            <a class="@(isDashboard ? "active" : "")" asp-controller="TraineeDashboard" asp-action="Index">Mentor-Bereich</a>
+            <a class="@(isImport ? "active" : "")" asp-controller="CurriculumImport" asp-action="Index">Lehrplan importieren</a>
+        }
+        else if (demoRole == AppConstants.RoleValues.Mentor)
+        {
+            <a class="@(isDashboard ? "active" : "")" asp-controller="TraineeDashboard" asp-action="Index">Mentor-Bereich</a>
+            <a class="@(isImport ? "active" : "")" asp-controller="CurriculumImport" asp-action="Index">Lehrplan importieren</a>
+        }
+        else
+        {
+            <a class="@(isDashboard ? "active" : "")" asp-controller="TraineeDashboard" asp-action="Index">Lehrplan</a>
+        }
+    </div>
+
+    <div class="nav-right">
+        @if (Context.User.Identity?.IsAuthenticated == true)
+        {
+            <div class="nav-trainee" aria-label="Angemeldeter Benutzer">
+                <div class="nav-avatar">@authenticatedInitials</div>
+                <span>@authenticatedDisplayName</span>
+            </div>
+            <form asp-controller="Account" asp-action="Logout" method="post" class="logout-form">
+                <button type="submit" class="nav-login-btn">Abmelden</button>
+            </form>
+        }
+        else
+        {
+            <a class="nav-login-btn" asp-controller="Account" asp-action="Login">Login</a>
+        }
+        @if (isDashboard)
+        {
+            <div class="puffer-badge">
+                <span class="puffer-lbl">Puffer</span>
+                <span class="puffer-val" id="nav-puffer"></span>
+            </div>
+        }
+    </div>
+</nav>

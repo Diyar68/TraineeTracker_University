@@ -1,0 +1,88 @@
+
+@model LessonModalViewModel
+
+<!-- Modal-Header -->
+<div class="modal-header">
+    <div class="modal-header-text">
+        <div id="modal-eyebrow" class="modal-eyebrow">@Model.EyebrowText</div>
+        <div id="modal-title" class="modal-title">@Model.Title</div>
+    </div>
+    <button class="modal-close" onclick="closeModal()" aria-label="Schließen">✕</button>
+</div>
+
+<!-- Meta-Zeile (Effort, Zeitstempel) -->
+<div id="modal-meta" class="modal-meta">
+    @foreach (var item in Model.MetaItems)
+    {
+        <span>@item</span>
+    }
+</div>
+
+<!-- Externer Link zum Card-Deck -->
+@if (!string.IsNullOrWhiteSpace(Model.ExternalLink))
+{
+    <a id="modal-ext-link" class="modal-ext-link" href="@Model.ExternalLink" target="_blank" rel="noopener noreferrer">
+        Lektion im Card-Deck öffnen ↗
+    </a>
+}
+else
+{
+    <a id="modal-ext-link" class="modal-ext-link" href="#" target="_blank" rel="noopener noreferrer"
+       style="display:none;">
+        Lektion im Card-Deck öffnen ↗
+    </a>
+}
+
+<!-- Rejection-Banner — nur bei Status 'rejected' sichtbar -->
+<div id="modal-rejection-banner" class="modal-rejection-banner" style="@(Model.Status == "rejected" && !string.IsNullOrWhiteSpace(Model.RejectionNote) ? "display:flex;" : "display:none;")">
+    <span class="rejection-icon">⚠</span>
+    <span id="modal-rejection-text">@Model.RejectionNote</span>
+</div>
+
+<!-- Status-Kette -->
+<div id="modal-status-chain" class="modal-status-chain">
+    @for (var i = 0; i < Model.StatusChain.Count; i++)
+    {
+        var node = Model.StatusChain[i];
+        var nodeClass = node.IsCurrent ? $"status-node current {node.Status}" : "status-node";
+        var nodeStyle = node.IsPast ? "color:var(--gray2);opacity:.7" : "";
+
+        <span class="@nodeClass" style="@nodeStyle">@node.Label</span>
+        @if (i < Model.StatusChain.Count - 1)
+        {
+            <span class="status-arrow">→</span>
+        }
+    }
+</div>
+
+<!-- Rejection-Formular — nur bei Übergang nach 'rejected' sichtbar -->
+<div id="rejection-form" class="rejection-form" style="display:none;">
+    <label for="rejection-reason" class="rejection-label">
+        Ablehnungsgrund <span class="required">*</span>
+    </label>
+    <textarea id="rejection-reason" class="rejection-textarea" rows="3"
+              placeholder="Was muss der Trainee korrigieren?"></textarea>
+</div>
+
+<!-- Aktions-Buttons -->
+<div id="modal-actions" class="modal-actions">
+    @if (Model.Transitions.Count == 0)
+    {
+        <div style="grid-column:1/-1;text-align:center;color:var(--gray3);font-family:var(--ui);font-size:12px;padding:16px;">
+            Keine weiteren Übergänge möglich.
+        </div>
+    }
+    else
+    {
+        @foreach (var transition in Model.Transitions)
+        {
+            <button class="action-btn @(transition.IsPrimary ? "primary" : "")"
+                    data-testid="@transition.TestId"
+                    onclick="triggerTransition('@transition.From','@transition.To')">
+                <span class="action-icon">@transition.Icon</span>
+                <span class="action-label">@transition.Label</span>
+                <span class="action-desc">@transition.Description</span>
+            </button>
+        }
+    }
+</div>

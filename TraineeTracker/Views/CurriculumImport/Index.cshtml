@@ -1,0 +1,103 @@
+@model CurriculumImportViewModel
+
+<section class="panel">
+    <div class="panel-header-row">
+        <div>
+            <h2>Lehrplan importieren</h2>
+            <p class="subtext">Es wird immer der vollständige Lehrplan importiert. Vorhandene Bearbeitungsstände bleiben erhalten.</p>
+        </div>
+    </div>
+
+    @if (!string.IsNullOrWhiteSpace(Model.ErrorMessage))
+    {
+        <div class="message danger" role="alert">
+            @Model.ErrorMessage
+        </div>
+    }
+
+    <form asp-controller="CurriculumImport" asp-action="Index" method="post" enctype="multipart/form-data">
+        @Html.AntiForgeryToken()
+        <div class="mb-3">
+            <label class="form-label" for="curriculumFile">JSON-Datei</label>
+            <input class="form-control" id="curriculumFile" name="curriculumFile" type="file" accept=".json,application/json" />
+        </div>
+
+        <div class="form-actions">
+            <button class="btn btn-primary" type="submit">Lehrplan importieren</button>
+        </div>
+    </form>
+</section>
+
+@if (Model.Result is not null)
+{
+    <section class="panel">
+        <h2>Importergebnis</h2>
+        <p class="subtext">Der Lehrplan wurde verarbeitet.</p>
+
+        <div class="stat-grid">
+            <div class="stat-card"><strong>@Model.Result.Created</strong>neu angelegte Lektionen</div>
+            <div class="stat-card"><strong>@Model.Result.Updated</strong>aktualisierte Lektionen</div>
+            <div class="stat-card"><strong class="pink">@Model.Result.Deprecated</strong>beim Import inaktiv geworden</div>
+            <div class="stat-card"><strong>@Model.Result.Unchanged</strong>unveränderte Lektionen</div>
+        </div>
+
+        @if (Model.Result.Warnings.Count > 0)
+        {
+            <div class="entry-card">
+                <h3>Warnungen</h3>
+                <ul>
+                    @foreach (var warning in Model.Result.Warnings)
+                    {
+                        <li>@warning</li>
+                    }
+                </ul>
+            </div>
+        }
+    </section>
+}
+
+<section class="panel">
+    <h2 style="margin-bottom: 32px;">Aktueller Lehrplan</h2>
+
+    <div class="stat-grid">
+        <div class="stat-card"><strong>@Model.TotalLections</strong>Lektionen gesamt</div>
+        <div class="stat-card"><strong>@Model.ActiveLections</strong>aktive Lektionen</div>
+        <div class="stat-card"><strong class="pink">@Model.InactiveLections</strong>inaktive Lektionen</div>
+    </div>
+
+    @if (Model.Lessons.Count == 0)
+    {
+        <p class="subtext">Es wurde noch kein Lehrplan importiert.</p>
+    }
+    else
+    {
+        <div class="entry-card">
+            <h3>Importierte Lektionen</h3>
+
+            <div class="lesson-import-list">
+                @foreach (var lesson in Model.Lessons.OrderBy(l => l.OrderIndex))
+                {
+                    <div class="lesson-import-row @(lesson.IsActive ? "active" : "inactive")">
+                        <div>
+                            <strong>@lesson.Number @lesson.Title</strong>
+                            <p class="subtext">
+                                ID: @lesson.Id · Aufwand: @lesson.Effort PT
+                                @if (!string.IsNullOrWhiteSpace(lesson.ExternalLink))
+                                {
+                                    <span> · </span>
+                                    <a class="cards-deck-link" href="@lesson.ExternalLink" target="_blank" rel="noopener">
+                                        Cards-Deck
+                                    </a>
+                                }
+                            </p>
+                        </div>
+
+                        <span class="lesson-status @(lesson.IsActive ? "active" : "inactive")">
+                            @(lesson.IsActive ? "aktiv" : "inaktiv")
+                        </span>
+                    </div>
+                }
+            </div>
+        </div>
+    }
+</section>

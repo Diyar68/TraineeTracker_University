@@ -1,0 +1,178 @@
+/* Gemeinsame App-Navigation fuer Dashboard, Admin, Import und Feedback. */
+nav.topnav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  min-height: 57px;
+  background: rgba(17, 17, 17, .95);
+  backdrop-filter: blur(12px);
+  padding: 13px 40px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  border-bottom: 1px solid var(--border, #2e2e2e);
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  flex: 0 0 auto;
+}
+
+.nav-logo-img {
+  height: 20px;
+  width: auto;
+  display: block;
+}
+
+.nav-pill {
+  margin-left: 24px;
+  display: flex;
+  align-items: center;
+  background: var(--bg3, #222222);
+  border: 1px solid var(--border, #2e2e2e);
+  border-radius: 99px;
+  padding: 4px;
+  gap: 2px;
+  min-width: 0;
+}
+
+.nav-pill a {
+  font-family: var(--ui, "Open Sans", Arial, sans-serif);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--gray2, #a0a0a0);
+  text-decoration: none;
+  padding: 6px 16px;
+  border-radius: 99px;
+  transition: background .15s, color .15s;
+  white-space: nowrap;
+  cursor: pointer;
+  border: 0;
+}
+
+.nav-pill a:hover {
+  color: var(--white, #ffffff);
+}
+
+.nav-pill a.active {
+  background: var(--white, #ffffff);
+  color: #111111;
+}
+
+.nav-pill a.disabled {
+  pointer-events: none;
+  opacity: .45;
+}
+
+.nav-right {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 0 0 auto;
+}
+
+.nav-login-btn {
+  background: var(--red, #ff0844);
+  color: #ffffff;
+  text-decoration: none;
+  border-radius: 99px;
+  padding: 8px 20px;
+  font-family: var(--ui, "Open Sans", Arial, sans-serif);
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+  transition: background .15s;
+  border: none;
+  cursor: pointer;
+  display: inline-block;
+  margin: 0;
+}
+
+.nav-login-btn:hover {
+  background: var(--red-d, #c01038);
+  color: #ffffff;
+}
+
+.logout-form {
+  margin: 0;
+  display: inline-flex;
+}
+
+.nav-trainee {
+  font-family: var(--ui, "Open Sans", Arial, sans-serif);
+  font-size: 12px;
+  color: var(--gray2, #a0a0a0);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.puffer-badge {
+  background: var(--bg3, #222222);
+  border: 1px solid var(--border, #2e2e2e);
+  border-radius: 99px;
+  padding: 5px 14px;
+  font-family: var(--ui, "Open Sans", Arial, sans-serif);
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.puffer-val {
+  font-weight: 700;
+}
+
+.puffer-val.neg {
+  color: var(--red, #ff0844);
+}
+
+.puffer-lbl {
+  color: var(--gray3, #555555);
+}
+
+@media (max-width: 1180px) {
+  nav.topnav {
+    padding-inline: 24px;
+  }
+}
+
+@media (max-width: 980px) {
+  nav.topnav {
+    flex-wrap: wrap;
+  }
+
+  .nav-pill {
+    margin-left: 0;
+    order: 3;
+    width: 100%;
+    overflow-x: auto;
+  }
+
+  .nav-right {
+    gap: 8px;
+  }
+}
+
+@media (max-width: 680px) {
+  nav.topnav {
+    padding: 12px 16px;
+  }
+
+  .nav-right {
+    width: 100%;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
+  .nav-login-btn {
+    max-width: 100%;
+  }
+
+  .nav-trainee {
+    display: none;
+  }
+}

@@ -1,0 +1,86 @@
+
+@* Views/TraineeDashboard/Index.cshtml *@
+@model TraineeDashboardViewModel
+@using TraineeTracker.Helpers
+
+@{
+    ViewData["Title"] = "Mein Lehrplan";
+    var roleCookie = Context.Request.Cookies[AppConstants.Cookies.Role];
+    var demoRole = roleCookie == AppConstants.RoleValues.Mentor
+        ? AppConstants.RoleValues.Mentor
+        : roleCookie == AppConstants.RoleValues.Admin
+            ? AppConstants.RoleValues.Admin
+            : AppConstants.RoleValues.Trainee;
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/app-navbar.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/trainee-dashboard.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/dashboard-sidebar.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/lection-cards.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/lesson-modal.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/statistics.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/weekly-plan.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/feedback.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/mentor.css" asp-append-version="true" />
+}   
+
+@* CSRF-Token für AJAX-Requests (sendTransition, etc.) *@
+@Html.AntiForgeryToken()
+<partial name="_AppNavbar" model="demoRole" />
+
+
+<!-- ═══════════════════════════════════════════════════════
+     LAYOUT
+═══════════════════════════════════════════════════════ -->
+<div class="page">
+
+
+    <partial name="_DashboardSidebar" model="Model" />
+
+
+    <!-- ═══════════════════════════════════════════════════
+         MAIN — LEHRPLAN
+    ═══════════════════════════════════════════════════════ -->
+    <main class="main">
+
+        <partial name="_MentorOverviewView" model="Model" />
+
+        <div class="mentor-focus-banner" data-mentor-focus-banner>
+            <span>Ausgewählter Trainee: <strong data-selected-mentor-trainee></strong></span>
+            <button type="button" class="mentor-back-btn" onclick="backToMentorOverview()">Zurück zur
+                Mentor-Übersicht</button>
+            </div>
+
+            <partial name="_LehrplanView" model="Model" />
+
+        <partial name="_WeeklyPlanView" />
+
+            <partial name="_StatisticsView" model="Model" />
+
+            <partial name="_DashboardFeedbackView" model="Model" />
+
+
+        </main>
+    </div>
+
+
+    <partial name="_LessonModal" />
+    <partial name="_PtInfoModal" />
+    <partial name="_Toast" />
+
+
+    @section Scripts {
+        <script src="~/js/shared-ui.js" asp-append-version="true"></script>
+        <script src="~/js/role-switcher.js" asp-append-version="true"></script>
+        <script src="~/js/mentor.js" asp-append-version="true"></script>
+        <script src="~/js/filters.js" asp-append-version="true"></script>
+        <script src="~/js/weekly-plan.js" asp-append-version="true"></script>
+        <script src="~/js/statistics.js" asp-append-version="true"></script>
+        <script src="~/js/feedback.js" asp-append-version="true"></script>
+        <script src="~/js/lesson-transitions.js" asp-append-version="true"></script>
+        <script src="~/js/lesson-modal.js" asp-append-version="true"></script>
+        <script src="~/js/lesson-card-updates.js" asp-append-version="true"></script>
+        <script src="~/js/trainee-dashboard.js" asp-append-version="true"></script>
+        <script src="~/js/dashboard-init.js" asp-append-version="true"></script>
+    }

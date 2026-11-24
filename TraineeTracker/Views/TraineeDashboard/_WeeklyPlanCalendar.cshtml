@@ -1,0 +1,61 @@
+
+@model WeeklyPlanViewModel
+
+<div id="cal-grid"
+     class="cal-grid"
+     data-week-start="@Model.From.ToString("yyyy-MM-dd")"
+     data-week-label="@Model.WeekLabel">
+    <div class="cal-col-head"></div>
+
+    @foreach (var day in Model.HeaderDays)
+    {
+        <div class="@day.HeaderCssClass">
+            @day.DayName<br>
+            @if (day.IsToday)
+            {
+                <div class="today-col">
+                    <span class="day-num-wrap">
+                        <span class="day-num">@day.DayNumber</span>
+                    </span>
+                </div>
+            }
+            else
+            {
+                <span class="day-num">@day.DayNumber</span>
+            }
+        </div>
+    }
+
+    @foreach (var week in Model.Weeks)
+    {
+        <div class="cal-week-num">KW<br>@week.CalendarWeek</div>
+
+        @foreach (var day in week.Days)
+        {
+            <div class="@day.DayCssClass">
+                @{
+                    var visibleEntries = day.Entries.Take(3).ToList();
+                }
+
+                @foreach (var item in visibleEntries)
+                {
+                    <div class="cal-chip @item.CssClass"
+                         title="@item.Tooltip"
+                         onclick="openLesson(@item.Id)">
+                        <span class="cal-chip-title">@item.Title</span>
+                        <span class="cal-chip-effort">@item.Effort</span>
+                    </div>
+                }
+
+                @if (day.Entries.Count > visibleEntries.Count)
+                {
+                    <div class="cal-more">+@(day.Entries.Count - visibleEntries.Count) weitere</div>
+                }
+                else if (day.Entries.Count == 0)
+                {
+                    <div class="cal-empty-label">Noch frei</div>
+                }
+            </div>
+        }
+    }
+</div>

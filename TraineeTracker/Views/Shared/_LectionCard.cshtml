@@ -1,0 +1,38 @@
+
+@* Views/Shared/_LectionCard.cshtml *@
+@model LectionCardViewModel
+
+@* data-order: für JS-Sortierung nach Lehrplanreihenfolge (applySortToDom)
+   data-status: für JS-Filterung (applyFilters / setFilter)
+   data-search: für JS-Suche nach Titel und Status
+   data-id:     für AJAX-Modal (openLesson / updateCardInList) *@
+<div class="lesson-card @Model.StatusCssClass" data-testid="lesson-card" data-id="@Model.Lection.Id" data-order="@(Model.Progress?.IndividualOrderIndex ?? Model.Lection.OrderIndex)"
+     data-status="@Model.StatusKey" data-group-label="@Model.GroupLabel" data-group-order="@Model.GroupOrder"
+     data-status-priority="@Model.SortPriority" data-group-uses-priority="@Model.GroupUsesPriorityValue"
+     data-search="@Model.SearchText" onclick="openLesson(@Model.Lection.Id)">
+
+    <div class="lesson-body">
+        <div class="lesson-title">@Model.Lection.Title</div>
+        <div class="lesson-meta">
+            @Model.MetaText
+        </div>
+    </div>
+
+    <div class="lesson-right">
+        <span class="badge @Model.StatusCssClass" data-testid="lesson-status-badge">
+            <span class="badge-dot"></span>
+            <span class="badge-label">@Model.StatusLabel</span>
+        </span>
+        <span class="lesson-effort">@Model.EffortText</span>
+    </div>
+
+    @* Rejection-Note — nur bei Status 'rejected' mit gesetzter Note *@
+    @if (Model.HasRejectionNote)
+    {
+        <div class="rejection-note">
+            <span>⚠</span>
+            <span>@Model.RejectionNote</span>
+        </div>
+    }
+
+</div>

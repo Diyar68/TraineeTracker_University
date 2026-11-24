@@ -1,0 +1,328 @@
+body.admin-area {
+    min-height: 100vh;
+    background: #141210;
+    color: #ffffff;
+}
+
+.admin-area .container {
+    width: min(1180px, calc(100% - 48px));
+    margin: 0 auto;
+}
+
+.admin-area .page-head {
+    background: #141210;
+    border-bottom: 1px solid #2e2e2e;
+    padding: 32px 0 22px;
+}
+
+.admin-area .eyebrow {
+    color: #a0a0a0;
+    font-size: .78rem;
+    letter-spacing: .08em;
+}
+
+.admin-area .accent-line {
+    width: 150px;
+    height: 3px;
+    background: #ff0844;
+    margin: 9px 0 10px;
+}
+
+.admin-area .page-head h1 {
+    margin: 0;
+    color: #ffffff;
+    font-size: 2.45rem;
+    line-height: .95;
+    letter-spacing: 0;
+}
+
+.admin-area main {
+    padding: 28px 0 56px;
+}
+
+.admin-area .stat-grid {
+    gap: 14px;
+    margin-bottom: 22px;
+}
+
+.admin-area .stat-card,
+.admin-area .panel,
+.admin-area .entry-card,
+.admin-area .message {
+    background: #1e1e1e;
+    border: 1px solid #2e2e2e;
+    border-radius: 8px;
+    box-shadow: none;
+}
+
+.admin-area .stat-card {
+    min-height: 92px;
+    padding: 18px 20px;
+    color: #a0a0a0;
+    font-size: .9rem;
+}
+
+.admin-area .stat-card strong {
+    color: #ffffff;
+    font-family: "League Spartan", Arial, sans-serif;
+    font-size: 2.25rem;
+    font-weight: 900;
+    letter-spacing: 0;
+}
+
+.admin-area .stat-card .pink {
+    color: #ff0844;
+}
+
+.admin-area .panel {
+    padding: 24px;
+    margin-bottom: 22px;
+}
+
+.admin-area .panel-header-row {
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.admin-area .panel h2,
+.admin-area .entry-card h3 {
+    color: #ffffff;
+    letter-spacing: 0;
+}
+
+.admin-area .panel h2 {
+    margin: 0;
+    font-size: 1.45rem;
+}
+
+.admin-area .entry-card h3 {
+    font-size: 1.25rem;
+}
+
+.admin-area .subtext,
+.admin-area .meta-row,
+.admin-area .mentor-list,
+.admin-area .entry-card p {
+    color: #a0a0a0;
+}
+
+.admin-area .date-range {
+    color: #f0f0f0;
+}
+
+.admin-area .user-table {
+    border-collapse: separate;
+    border-spacing: 0;
+    margin-top: 18px;
+}
+
+.admin-area .user-table th {
+    color: #a0a0a0;
+    border-bottom: 1px solid #2e2e2e;
+    padding: 10px 12px;
+    letter-spacing: .06em;
+}
+
+.admin-area .user-table td {
+    color: #f0f0f0;
+    border-bottom: 1px solid #2e2e2e;
+    padding: 14px 12px;
+}
+
+.admin-area .user-table tbody tr:hover td {
+    background: #222222;
+}
+
+.admin-area .row-closed td {
+    opacity: .5;
+}
+
+.admin-area .row-actions a {
+    box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+    min-height: 32px;
+    margin-left: 8px;
+    padding: 6px 10px;
+    border: 1px solid #3a3a3a;
+    border-radius: 999px;
+    color: #f0f0f0;
+    background: transparent;
+    transition: color .2s ease, background .2s ease, border-color .2s ease;
+}
+
+.admin-area .row-actions a:hover {
+    color: #ffffff;
+    background: #222222;
+    border-color: #ff0844;
+}
+
+.admin-area .row-actions a.action-danger {
+    color: #a0a0a0;
+}
+
+.admin-area .row-actions a.action-danger:hover {
+    color: #ffffff;
+    background: rgba(217, 54, 54, .14);
+    border-color: #d93636;
+}
+
+.admin-area .row-actions a.action-restore:hover {
+    color: #ffffff;
+    background: rgba(34, 197, 94, .14);
+    border-color: #22c55e;
+}
+
+.admin-area .role-badge {
+    border-color: #3a3a3a;
+    background: #222222;
+    color: #f0f0f0;
+}
+
+.admin-area .role-badge.role-trainee {
+    border-color: rgba(59, 130, 246, .45);
+    color: #8bb7ff;
+}
+
+.admin-area .role-badge.role-mentor {
+    border-color: rgba(245, 158, 11, .5);
+    color: #f7c878;
+}
+
+.admin-area .role-badge.role-admin {
+    border-color: rgba(255, 8, 68, .5);
+    color: #ff6d90;
+}
+
+.admin-area .btn,
+.admin-area .btn-primary,
+.admin-area .btn-dark,
+.admin-area .btn-outline-secondary,
+.admin-area .btn-outline-dark {
+    min-height: 32px;
+    padding: 6px 14px;
+    font-size: .85rem;
+}
+
+.admin-area .btn-primary {
+    background: #ff0844;
+    border-color: #ff0844;
+    color: #ffffff;
+}
+
+.admin-area .btn-primary:hover,
+.admin-area .btn-primary:focus {
+    background: #d90035;
+    border-color: #d90035;
+}
+
+.admin-area .btn-dark {
+    background: #222222;
+    border-color: #3a3a3a;
+    color: #ffffff;
+}
+
+.admin-area .btn-dark:hover,
+.admin-area .btn-dark:focus {
+    background: rgba(217, 54, 54, .14);
+    border-color: #d93636;
+}
+
+.admin-area .btn-outline-secondary,
+.admin-area .btn-outline-dark {
+    background: transparent;
+    border-color: #3a3a3a;
+    color: #f0f0f0;
+}
+
+.admin-area .btn-outline-secondary:hover,
+.admin-area .btn-outline-dark:hover {
+    background: #222222;
+    border-color: #ff0844;
+    color: #ffffff;
+}
+
+.admin-area .form-label {
+    color: #f0f0f0;
+    font-size: .9rem;
+}
+
+.admin-area .mb-3 {
+    margin-bottom: 18px;
+}
+
+.admin-area .form-control,
+.admin-area .form-select {
+    width: 100%;
+    box-sizing: border-box;
+    min-height: 42px;
+    border-radius: 8px;
+    border: 1px solid #3a3a3a;
+    background: #141210;
+    color: #ffffff;
+    padding: 9px 12px;
+    font: inherit;
+}
+
+.admin-area .form-control:focus,
+.admin-area .form-select:focus {
+    outline: none;
+    border-color: #ff0844;
+    box-shadow: 0 0 0 3px rgba(255, 8, 68, .16);
+}
+
+.admin-area .mentor-checklist {
+    border-color: #3a3a3a;
+    border-radius: 8px;
+    background: #141210;
+}
+
+.admin-area .mentor-check-item {
+    color: #f0f0f0;
+}
+
+.admin-area .mentor-check-item input[type="checkbox"] {
+    accent-color: #ff0844;
+}
+
+.admin-area .message {
+    color: #f0f0f0;
+}
+
+.admin-area .message.danger {
+    border-left-color: #d93636;
+}
+
+.admin-area .text-invalid,
+.admin-area .field-validation-error {
+    color: #ff6d90;
+}
+
+.admin-area .input-validation-error {
+    border-color: #d93636 !important;
+}
+
+.admin-area .form-actions,
+.admin-area .entry-actions {
+    gap: 10px;
+}
+
+@media (max-width: 850px) {
+    .admin-area .container {
+        width: min(100% - 32px, 1180px);
+    }
+
+    .admin-area .page-head h1 {
+        font-size: 2rem;
+    }
+
+    .admin-area .panel-header-row {
+        align-items: flex-start;
+    }
+
+    .admin-area .user-table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+}

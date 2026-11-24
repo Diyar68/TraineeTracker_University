@@ -1,0 +1,99 @@
+@model List<UserListItemViewModel>
+
+@{
+    var active = Model.Where(u => !u.IsClosed).ToList();
+    var closed = Model.Where(u => u.IsClosed).ToList();
+}
+
+<div class="stat-grid">
+    <div class="stat-card"><strong>@active.Count(u => u.Role == AppConstants.Roles.Trainee)</strong>aktive Trainees</div>
+    <div class="stat-card"><strong>@active.Count(u => u.Role == AppConstants.Roles.Mentor)</strong>Mentoren</div>
+    <div class="stat-card"><strong>@active.Count(u => u.Role == AppConstants.Roles.Admin)</strong>Admins</div>
+    <div class="stat-card"><strong class="pink">@closed.Count</strong>gesperrte Konten</div>
+</div>
+
+<section class="panel">
+    <div class="panel-header-row">
+        <h2>Aktive Benutzer</h2>
+        <a class="btn btn-primary" asp-controller="Admin" asp-action="Create">Benutzer anlegen</a>
+    </div>
+    <p class="subtext">Alle aktiven Konten. Gesperrte Konten erscheinen nur in dieser Ansicht.</p>
+
+    <table class="user-table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>E-Mail</th>
+                <th>Rolle</th>
+                <th>Zeitraum / Mentoren</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in active.OrderBy(u => u.Role).ThenBy(u => u.FullName))
+            {
+                <tr>
+                    <td><strong>@user.FullName</strong></td>
+                    <td>@user.Email</td>
+                    <td><span class="role-badge demo@portfolio.example()">@user.Role</span></td>
+                    <td>
+                        @if (user.Role == AppConstants.Roles.Trainee)
+                        {
+                            <span class="date-range">@user.TraineeStartDate?.ToString("dd.MM.yyyy") – @user.TraineeEndDate?.ToString("dd.MM.yyyy")</span>
+                            @if (user.AssignedMentorNames.Count > 0)
+                            {
+                                <span class="mentor-list">@string.Join(", ", user.AssignedMentorNames)</span>
+                            }
+                        }
+                    </td>
+                    <td class="row-actions">
+                        <a asp-controller="Admin" asp-action="Edit" asp-route-id="@user.Id">Bearbeiten</a>
+                        <a asp-controller="Admin" asp-action="Close" asp-route-id="@user.Id" class="action-danger">Sperren</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</section>
+
+@if (closed.Count > 0)
+{
+    <section class="panel">
+        <h2>Gesperrte Konten</h2>
+        <p class="subtext">Diese Benutzer können sich nicht mehr anmelden und sind sonst überall in der Anwendung ausgeblendet.</p>
+        <table class="user-table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>E-Mail</th>
+                    <th>Rolle</th>
+                    <th>Zeitraum / Mentoren</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var user in closed.OrderBy(u => u.FullName))
+                {
+                    <tr class="row-closed">
+                        <td><strong>@user.FullName</strong></td>
+                        <td>@user.Email</td>
+                        <td><span class="role-badge demo@portfolio.example()">@user.Role</span></td>
+                        <td>
+                            @if (user.Role == AppConstants.Roles.Trainee)
+                            {
+                                <span class="date-range">@user.TraineeStartDate?.ToString("dd.MM.yyyy") – @user.TraineeEndDate?.ToString("dd.MM.yyyy")</span>
+                                @if (user.AssignedMentorNames.Count > 0)
+                                {
+                                    <span class="mentor-list">@string.Join(", ", user.AssignedMentorNames)</span>
+                                }
+                            }
+                        </td>
+                        <td class="row-actions">
+                            <a asp-controller="Admin" asp-action="Close" asp-route-id="@user.Id" class="action-restore">Wiedereröffnen</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </section>
+}

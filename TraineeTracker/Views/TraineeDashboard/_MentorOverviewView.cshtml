@@ -1,0 +1,181 @@
+@model TraineeDashboardViewModel
+
+@{
+    var currentAction = ViewContext.RouteData.Values["action"]?.ToString();
+}
+
+<!-- VIEW: Startseite des Mentors, mit allen Bereichen, als Sektionen  -->
+
+
+<div id="view-mentor" class="view active">
+    <div class="mentor-overview">
+        <div class="mentor-topbar" role="navigation" aria-label="Mentor-Navigation">
+            <nav class="mentor-topbar-inner">
+                <button class="btn btn-nav" onclick="scrollToTrainees()">Meine Trainees</button>
+                <button class="btn btn-nav" onclick="scrollToFeedback()">Feedback</button>
+                <button class="btn btn-nav" onclick="scrollToCurriculum()">Lehrplan</button>
+            </nav>
+        </div>
+
+        <div class="mentor-overview-layout">
+            <aside id="mentor-sidebar" class="mentor-side-nav" aria-label="Schnellnavigation">
+                <div class="mentor-side-nav-title">Sektionen</div>
+                <button class="mentor-side-nav-link" type="button" onclick="scrollToTrainees()">Meine Trainees</button>
+                <button class="mentor-side-nav-link" type="button" onclick="scrollToFeedback()">Feedback</button>
+                <button class="mentor-side-nav-link" type="button" onclick="scrollToCurriculum()">Lehrplan</button>
+            </aside>
+
+            <div class="mentor-overview-content">
+                <div class="mentor-header">
+            <div>
+                <div class="main-eyebrow">Mentor</div>
+                <h1 class="main-title">Mentor-Bereich</h1>
+                <p class="main-sub">Wähle einen Trainee aus, um fokussiert mit Lehrplan, Wochenplan, Statistik und
+                    Feedback zu arbeiten.</p>
+                </div>
+            </div>
+
+            <section class="mentor-section-trainees" id="trainees-section">
+                <div class="mentor-section-head">
+                    <div>
+                        <h2>Meine Trainees</h2>
+                        <p>Zugewiesene Demo-Trainees im Überblick.</p>
+                    </div>
+                    <span>@Model.Mentor.Trainees.Count Trainees</span>
+                </div>
+
+                @if (Model.Mentor.Trainees.Any())
+                {
+                    <div class="mentor-trainee-grid">
+                        @foreach (var trainee in Model.Mentor.Trainees)
+                        {
+                            <article class="mentor-trainee-card" data-mentor-trainee-card data-trainee-id="@trainee.Id"
+                                     data-trainee-name="@trainee.Name" data-trainee-initials="@trainee.Initials"
+                                     data-trainee-api-email="@trainee.ApiEmail">
+                                <div class="mentor-trainee-top">
+                                    <div class="mentor-avatar">@trainee.Initials</div>
+                                    <div>
+                                        <h3>@trainee.Name</h3>
+                                        <p>Aktueller Review-Kontext</p>
+                                    </div>
+                                </div>
+
+                                <div class="mentor-progress">
+                                    <div class="mentor-progress-meta">
+                                        <span>Geschafft</span>
+                                        <strong>@trainee.ProgressPercent%</strong>
+                                    </div>
+                                    <div class="mentor-progress-track">
+                                        <div class="mentor-progress-fill" style="width:@trainee.ProgressPercent%"></div>
+                                    </div>
+                                </div>
+
+                                <div class="mentor-metrics">
+                                    <div>
+                                        <span>PT-Puffer</span>
+                                        <strong
+                                        class="@(trainee.BufferIsNegative ? "negative" : "positive")">@trainee.BufferText</strong>
+                                    </div>
+                                    <div>
+                                        <span>Handlungsbedarf</span>
+                                        <strong>@trainee.AttentionCount</strong>
+                                    </div>
+                                </div>
+
+                                <button type="button" class="mentor-open-btn" onclick="openMentorTrainee('@trainee.Id')">
+                                    Trainee öffnen
+                                </button>
+                            </article>
+                        }
+                    </div>
+                }
+                else
+                {
+                    <p class="mentor-feedback-card">Keine Trainees verfügbar.</p>
+                }
+            </section>
+
+            <section class="mentor-section-feedback" id="feedback-section">
+                <div class="mentor-section-head">
+                    <div>
+                        <h2>Neuestes Feedback</h2>
+                        <p>Aktuelle Rückmeldungen deiner zugewiesenen Trainees.</p>
+                    </div>
+                </div>
+
+                @if (Model.Mentor.LatestFeedback.Any())
+                {
+                    <div class="mentor-feedback-list">
+                        @foreach (var feedback in Model.Mentor.LatestFeedback)
+                        {
+                            <article class="mentor-feedback-card">
+                                <div>
+                                    <span>@feedback.TraineeName · @feedback.SubmittedAt.ToString("dd.MM.yyyy")</span>
+                                    <h3>@feedback.LessonTitle</h3>
+                                </div>
+                                <div class="feedback-meta">
+                                    <span>@(string.IsNullOrWhiteSpace(feedback.Difficulty) ? "Keine Angabe" : feedback.Difficulty)</span>
+                                    <span>@(feedback.ActualEffortDays > 0 ? $"{feedback.ActualEffortDays:0.#} PT" : "Kein Aufwand")</span>
+                                    <span class="feedback-prior-knowledge"><strong>Vorkenntnisse:</strong> @(string.IsNullOrWhiteSpace(feedback.PriorKnowledge) ? "Keine Angabe" : feedback.PriorKnowledge)</span>
+                                </div>
+                                <p>@(string.IsNullOrWhiteSpace(feedback.Comment) ? "Keine Anmerkung." : feedback.Comment)</p>
+                            </article>
+                        }
+                    </div>
+                }
+                else
+                {
+                    <div class="mentor-feedback-list">
+                        <article class="mentor-feedback-card">
+                            <p>Keine Feedback-Einträge vorhanden.</p>
+                        </article>
+                    </div>
+                }
+            </section>
+
+
+            <section class="mentor-section-curriculum" id="curriculum-section">
+                <div class="mentor-section-head">
+                    <div>
+                        <h2>Aktueller Lehrplan</h2>
+                        <p>Die verfügbaren Lektionen im Überblick.</p>
+                    </div>
+                    <a asp-controller="CurriculumImport" asp-action="Index" class="mentor-open-btn mentor-import-link">
+                        Lektionen importieren
+                    </a>
+                </div>
+
+                <div id="lessonList" class="mentor-curriculum-grid">
+                    @foreach (var lesson in Model.Lessons.OrderBy(l => l.OrderIndex))
+                    {
+                        <article class="webdev-card" data-id="@lesson.Id">
+                            <div class="card-header">
+                                <h3 class="card-title">@lesson.Title</h3>
+                            </div>
+
+                            <div class="card-body">
+                                <p class="card-text">@lesson.Title</p>
+                                <p class="card-text">
+                                    <strong>Aufwand:</strong> @lesson.Effort
+                                </p>
+
+                                @if (!string.IsNullOrEmpty(lesson.ExternalLink))
+                                {
+                                    <a href="@lesson.ExternalLink" class="card-link" target="_blank">
+                                        Lernkarten öffnen
+                                    </a>
+                                }
+                            </div>
+                        </article>
+                    }
+                </div>
+
+                <div class="mentor-feedback-card">
+                    <p>Um für die Trainees den Lehrplan zu individualisieren, gehen sie auf den Trainee und ändern diesen
+                        per Drag und Drop.</p>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</div>

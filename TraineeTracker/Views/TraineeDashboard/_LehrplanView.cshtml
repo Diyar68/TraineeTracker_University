@@ -1,0 +1,95 @@
+
+@model TraineeDashboardViewModel
+
+@{
+    var hasLections = Model.Groups.Any(group => group.Items.Any());
+    var demoRole = Context.Request.Cookies[AppConstants.Cookies.Role]?.Trim().ToLowerInvariant();
+    var canImportCurriculum = demoRole is AppConstants.RoleValues.Mentor or AppConstants.RoleValues.Admin;
+}
+
+<!-- VIEW: LEHRPLAN -->
+<div id="view-lehrplan" class="view active">
+
+    <div class="main-header reveal">
+        <div class="main-eyebrow">Trainee Tracker</div>
+        <h1 class="main-title"><span data-dashboard-trainee-name>@Model.TraineeDisplayName</span>'s <span class="red">Lehrplan</span></h1>
+        <p class="main-sub" id="header-summary">
+            @Model.Stats.HeaderSummaryText
+        </p>
+        <div class="header-chip-row" aria-label="Lehrplan-Zusammenfassung">
+            <span class="header-chip">
+                <span class="header-chip-label">PT-Puffer</span>
+                <strong id="header-buffer" class="@Model.Stats.HeaderBufferClass">
+                    @Model.Stats.HeaderBufferText
+                </strong>
+            </span>
+            <span class="header-chip">
+                <span class="header-chip-label">Handlungsbedarf</span>
+                <strong id="header-attention">@Model.Stats.AttentionCount</strong>
+            </span>
+            <span class="header-chip">
+                <span class="header-chip-label">Wartet auf Review</span>
+                <strong id="header-review">@Model.Stats.ReviewCount</strong>
+            </span>
+        </div>
+    </div>
+
+    @if (hasLections)
+    {
+        <!-- Toolbar -->
+        <div class="toolbar">
+            <input id="search" class="search-input" type="text" placeholder="Lektion suchen…" autocomplete="off" />
+
+            <button id="sort-btn" class="toolbar-btn" onclick="toggleSort()">
+                Sortierung: Handlungsbedarf
+            </button>
+
+            <button id="inactive-btn" class="toolbar-btn" onclick="toggleInactive()">
+                Inaktive sichtbar
+            </button>
+        </div>
+    }
+
+    <!-- Lektionsliste
+         Gruppen und Karten werden vom Server gerendert.
+         JavaScript filtert und sortiert nur bereits vorhandene DOM-Elemente. -->
+    <div id="lessons-container">
+
+        @foreach (var group in Model.Groups)
+        {
+            <div class="lesson-group reveal">
+                <div class="group-title">@group.Label</div>
+                <div class="lessons-list">
+                    @foreach (var item in group.Items)
+                    {
+                        <partial name="_LectionCard" model="item" />
+                    }
+                </div>
+            </div>
+        }
+
+        @if (!hasLections)
+        {
+            <div id="empty-state" class="lesson-empty-state">
+                <p>Es wurde noch kein Lehrplan importiert.</p>
+                @if (canImportCurriculum)
+                {
+                    <a class="toolbar-btn" asp-controller="CurriculumImport" asp-action="Index">Lehrplan importieren</a>
+                }
+            </div>
+        }
+        else
+        {
+            <div id="empty-state" style="display:none;">
+                <p>Keine Lektionen gefunden.</p>
+            </div>
+        }
+
+    </div>
+</div>
+
+
+<!-- Skript in JavaScript für individuelle Sortierung der Lektionen im Lehrplan (externalized) -->
+@if (demoRole == "mentor" || demoRole == "admin") {
+    <script src="~/js/lesson-sortable.js" asp-append-version="true"></script>
+}

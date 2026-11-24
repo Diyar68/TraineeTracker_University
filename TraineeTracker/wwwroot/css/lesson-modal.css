@@ -1,0 +1,140 @@
+
+/* ═══════════════════════════════════════════════════════
+   MODAL
+═══════════════════════════════════════════════════════ */
+.modal-overlay {
+  position: fixed; inset: 0; z-index: 200;
+  background: rgba(0,0,0,.75); backdrop-filter: blur(6px);
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; pointer-events: none;
+  transition: opacity .2s ease;
+}
+.modal-overlay.open { opacity: 1; pointer-events: all; }
+
+.modal {
+  background: var(--bg2); border: 1px solid var(--border); border-radius: 16px;
+  width: min(560px, 92vw); max-height: 88vh; overflow-y: auto;
+  transform: translateY(16px) scale(.97);
+  transition: transform .25s cubic-bezier(.34,1.56,.64,1);
+  padding: 32px; position: relative;
+}
+.modal-overlay.open .modal { transform: translateY(0) scale(1); }
+
+/* Modal Header — neu in Razor-Struktur */
+.modal-header {
+  display: flex; align-items: flex-start;
+  justify-content: space-between; gap: 16px; margin-bottom: 4px;
+}
+.modal-header-text { flex: 1; min-width: 0; }
+
+.modal-eyebrow {
+  font-family: var(--ui); font-size: 10px; font-weight: 600;
+  letter-spacing: .14em; text-transform: uppercase;
+  color: var(--red); margin-bottom: 6px;
+}
+.modal-title {
+  font-family: var(--head); font-weight: 900; font-size: 1.5rem;
+  line-height: 1.1; text-transform: uppercase; margin-bottom: 4px;
+}
+.modal-meta {
+  font-family: var(--ui); font-size: 12px; color: var(--gray2);
+  display: flex; gap: 12px; flex-wrap: wrap;
+  margin-bottom: 24px; padding-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+}
+.modal-meta span { display: flex; align-items: center; gap: 5px; }
+
+/* Status-Kette */
+.modal-status-chain {
+  display: flex; align-items: center; gap: 6px;
+  flex-wrap: wrap; margin-bottom: 24px;
+}
+.status-node {
+  display: flex; align-items: center; gap: 5px;
+  padding: 6px 12px; border-radius: 99px;
+  font-family: var(--ui); font-size: 11px; font-weight: 600;
+  border: 1px solid var(--border); color: var(--gray3); background: var(--surface);
+}
+.status-node.current                  { border-color: currentColor; }
+.status-node.current.open             { color: #888; }
+.status-node.current.started          { color: var(--amber);  border-color: rgba(245,158,11,.5); background: rgba(245,158,11,.08); }
+.status-node.current.finished         { color: #60a5fa;       border-color: rgba(59,130,246,.5); background: rgba(59,130,246,.08); }
+.status-node.current.accepted         { color: var(--green);  border-color: rgba(34,197,94,.5);  background: rgba(34,197,94,.08); }
+.status-node.current.rejected         { color: #f87195;       border-color: rgba(232,24,74,.5);  background: rgba(232,24,74,.08); }
+.status-node.current.rated            { color: #c084fc;       border-color: rgba(168,85,247,.5); background: rgba(168,85,247,.08); }
+.status-node.current.skipped          { color: #777;          border-color: #444; }
+.status-arrow { color: var(--gray3); font-size: 14px; }
+
+/* Aktions-Grid */
+#modal-actions {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 8px; margin-bottom: 20px;
+}
+.action-btn {
+  padding: 12px 16px; border-radius: 10px;
+  font-family: var(--ui); font-size: 12px; font-weight: 600;
+  cursor: pointer; border: 1px solid var(--border); background: var(--surface);
+  color: var(--gray2); text-align: left; line-height: 1.3;
+  transition: background .15s, border-color .15s, color .15s, transform .12s;
+}
+.action-btn:hover { background: var(--bg3); color: var(--white); border-color: #444; transform: translateY(-1px); }
+.action-btn:active { transform: translateY(0); }
+.action-btn .action-icon  { display: block; font-size: 16px; margin-bottom: 4px; }
+.action-btn .action-label { display: block; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; }
+.action-btn .action-desc  { display: block; font-size: 10px; color: var(--gray3); margin-top: 2px; font-weight: 400; text-transform: none; letter-spacing: 0; }
+.action-btn.primary       { background: var(--red); border-color: var(--red); color: #fff; }
+.action-btn.primary:hover { background: var(--red-d); border-color: var(--red-d); color: #fff; }
+.action-btn.primary .action-desc { color: rgba(255,255,255,.65); }
+.action-btn.secondary:hover .action-desc { color: var(--gray2); }
+
+/* Rejection-Formular */
+.rejection-form { background: rgba(232,24,74,.06); border: 1px solid rgba(232,24,74,.2); border-radius: 10px; padding: 16px; margin-bottom: 16px; }
+.rejection-label { font-family: var(--ui); font-size: 11px; font-weight: 600; color: #f87195; display: block; margin-bottom: 8px; }
+.required { color: var(--red); }
+.rejection-textarea {
+  width: 100%; background: rgba(0,0,0,.3); border: 1px solid rgba(232,24,74,.25);
+  border-radius: 8px; padding: 10px 12px;
+  font-family: var(--ui); font-size: 12px; color: var(--white);
+  resize: vertical; min-height: 72px; outline: none;
+  transition: border-color .15s; line-height: 1.5;
+}
+.rejection-textarea:focus       { border-color: rgba(232,24,74,.5); }
+.rejection-textarea::placeholder { color: var(--gray3); }
+
+/* Rejection-Banner im Modal */
+.modal-rejection-banner {
+  background: rgba(232,24,74,.08); border: 1px solid rgba(232,24,74,.2);
+  border-radius: 8px; padding: 12px 14px; margin-bottom: 20px;
+  font-family: var(--ui); font-size: 12px; color: #f87195; line-height: 1.5;
+  display: flex; gap: 10px; align-items: flex-start;
+}
+.rejection-icon { flex-shrink: 0; margin-top: 1px; }
+
+/* Modal schließen */
+.modal-close {
+  width: 32px; height: 32px; border-radius: 50%;
+  background: var(--bg3); border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; color: var(--gray2); font-size: 16px;
+  transition: all .15s; flex-shrink: 0;
+}
+.modal-close:hover { background: var(--surface); color: var(--white); }
+
+/* Externer Link */
+.modal-ext-link {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: var(--ui); font-size: 12px; color: var(--blue);
+  text-decoration: none; padding: 8px 14px; border-radius: 8px;
+  border: 1px solid rgba(59,130,246,.3); background: rgba(59,130,246,.06);
+  transition: all .15s; margin-bottom: 20px;
+}
+.modal-ext-link:hover { background: rgba(59,130,246,.12); border-color: rgba(59,130,246,.5); }
+
+/* Fehleranzeige */
+.modal-error {
+  background: rgba(232,24,74,.1); border: 1px solid rgba(232,24,74,.3);
+  border-radius: 8px; padding: 10px 14px;
+  font-family: var(--ui); font-size: 12px; color: #f87195;
+  margin-bottom: 12px; display: none;
+}
+.modal-error.visible { display: block; }

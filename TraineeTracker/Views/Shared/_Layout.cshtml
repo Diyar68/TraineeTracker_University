@@ -1,0 +1,77 @@
+@inject TraineeTracker.Services.DemoMode Demo
+@{
+    var controller = ViewContext.RouteData.Values["controller"]?.ToString() ?? "";
+    var action = ViewContext.RouteData.Values["action"]?.ToString() ?? "";
+    var isDashboard = controller == "TraineeDashboard";
+    var isLogin = controller == "Account" && action == "Login";
+    var isAdminArea = controller == "Admin" || controller == "CurriculumImport";
+    var roleCookie = Context.Request.Cookies[AppConstants.Cookies.Role];
+    var demoRole = roleCookie == AppConstants.RoleValues.Mentor
+        ? AppConstants.RoleValues.Mentor
+        : roleCookie == AppConstants.RoleValues.Admin
+            ? AppConstants.RoleValues.Admin
+            : roleCookie == AppConstants.RoleValues.Trainee
+                ? AppConstants.RoleValues.Trainee
+                : (string?)null;
+}
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - TraineeTracker</title>
+    @if (!isDashboard)
+    {
+        <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/css/shared-ui.css" asp-append-version="true" />
+        @if (!isLogin)
+        {
+            <link rel="stylesheet" href="~/css/app-navbar.css" asp-append-version="true" />
+        }
+        @if (isAdminArea)
+        {
+            <link rel="stylesheet" href="~/css/admin.css" asp-append-version="true" />
+        }
+        @if (isLogin)
+        {
+            <link rel="stylesheet" href="~/css/login.css" asp-append-version="true" />
+        }
+    }
+    @if (Demo.Enabled)
+    {
+        <style>
+            .action-btn, [data-feedback-create-form], .feedback-card-edit,
+            button[onclick^="editFeedback"], button[onclick^="deleteFeedback"] { display: none !important; }
+        </style>
+    }
+    @await RenderSectionAsync("Styles", required: false)
+</head>
+<body data-read-only="@Demo.Enabled.ToString().ToLowerInvariant()" class="@(isAdminArea ? "admin-area" : "")">
+    @Html.AntiForgeryToken()
+    @if (Demo.Enabled) { <p role="status">Portfolio-Demo · Fiktive Daten · Nur lesender Zugriff</p> }
+    @if (isDashboard || isLogin)
+    {
+        @RenderBody()
+    }
+    else
+    {
+        <partial name="_AppNavbar" model='@(demoRole ?? AppConstants.RoleValues.Trainee)' />
+
+        <header class="page-head">
+            <div class="container">
+                <div class="eyebrow">@ViewData["Eyebrow"]</div>
+                <div class="accent-line"></div>
+                <h1>@ViewData["Title"]</h1>
+            </div>
+        </header>
+
+        <main>
+            <div class="container">
+                @RenderBody()
+            </div>
+        </main>
+    }
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

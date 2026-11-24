@@ -1,0 +1,47 @@
+@model CloseAccountViewModel
+
+@if (Model.IsClosed)
+{
+    <div class="message">
+        <p class="mb-0">Das Konto von @Model.FullName wird wieder geöffnet. Der Benutzer kann sich danach erneut anmelden.</p>
+    </div>
+}
+else
+{
+    <div class="message danger">
+        <p class="mb-0">Das Konto von @Model.FullName wird gesperrt. Der Benutzer kann sich danach nicht mehr anmelden.</p>
+    </div>
+}
+
+<section class="panel">
+    <div class="entry-card">
+        <div class="entry-top">
+            <div>
+                <h3>@Model.FullName</h3>
+                <div class="meta-row">@Model.Email</div>
+            </div>
+            <span class="role-badge demo@portfolio.example()">@Model.Role</span>
+        </div>
+        @if (Model.IsClosed)
+        {
+            <p>Dieses Konto ist derzeit gesperrt.</p>
+        }
+        else
+        {
+            <p>Dieses Konto ist aktiv.</p>
+        }
+        <div class="entry-actions">
+            <form asp-action="Close" asp-route-id="@Model.Id" method="post" style="display:inline">
+                @if (Model.IsClosed)
+                {
+                    <button class="btn btn-primary" type="submit">Wiedereröffnen</button>
+                }
+                else
+                {
+                    <button class="btn btn-dark" type="submit">Konto sperren</button>
+                }
+            </form>
+            <a class="btn btn-outline-secondary" asp-controller="Admin" asp-action="Index">Abbrechen</a>
+        </div>
+    </div>
+</section>

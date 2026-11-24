@@ -1,0 +1,36 @@
+@model UserFormViewModel
+
+<section class="panel">
+    <form asp-action="Edit" asp-route-id="@Model.Id" method="post">
+        @await Html.PartialAsync("_UserForm", Model)
+        <div class="form-actions">
+            <button class="btn btn-primary" type="submit">Änderungen speichern</button>
+            <a class="btn btn-outline-secondary" asp-controller="Admin" asp-action="Index">Abbrechen</a>
+        </div>
+    </form>
+</section>
+
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+
+    <script>
+        (function () {
+
+            const roleSelect = document.getElementById("roleSelect");
+            const traineeFields = document.getElementById("traineeFields");
+
+            function toggle() {
+                traineeFields.style.display =
+                    roleSelect.value === "@AppConstants.Roles.Trainee"
+                        ? "block"
+                        : "none";
+            }
+
+            toggle();
+
+            roleSelect.addEventListener("change", toggle);
+
+        })();
+    </script>
+}

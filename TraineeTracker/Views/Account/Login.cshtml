@@ -1,0 +1,54 @@
+@inject TraineeTracker.Services.DemoMode Demo
+@model LoginViewModel
+
+@{
+    ViewData["Title"] = "Anmelden";
+}
+
+<div class="login-page">
+    <div class="login-card">
+        <div class="login-brand">
+            <span class="login-app-name">Trainee Tracker</span>
+            <span class="login-app-name">TraineeTracker</span>
+        </div>
+
+        <h1 class="login-title">Anmelden</h1>
+        <p class="login-sub">Melde dich mit deinen Zugangsdaten an.</p>
+
+        @if (Demo.Enabled)
+        {
+            <p>Lesende Portfolio-Demo mit fiktiven Beispieldaten.</p>
+            <form asp-action="DemoLogin" method="post">
+                <button class="btn btn-primary" name="role" value="trainee">Trainee-Demo</button>
+                <button class="btn btn-primary" name="role" value="mentor">Mentor-Demo</button>
+            </form>
+        }
+        else
+        {
+        <form asp-controller="Account" asp-action="Login" method="post" class="login-form" novalidate>
+            <div asp-validation-summary="ModelOnly" class="message danger login-summary"></div>
+
+            <div class="mb-3">
+                <label class="form-label" asp-for="Email">E-Mail</label>
+                <input class="form-control" asp-for="Email" type="email" autocomplete="username" placeholder="demo@portfolio.example" />
+                <span asp-validation-for="Email" class="text-invalid"></span>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" asp-for="Password">Passwort</label>
+                <input class="form-control" asp-for="Password" type="password" autocomplete="current-password" placeholder="••••••••" />
+                <span asp-validation-for="Password" class="text-invalid"></span>
+            </div>
+
+            <button type="submit" class="btn btn-primary login-submit">Anmelden</button>
+        </form>
+        }
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        localStorage.removeItem('traineeTracker.mentorTrainee');
+    </script>
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

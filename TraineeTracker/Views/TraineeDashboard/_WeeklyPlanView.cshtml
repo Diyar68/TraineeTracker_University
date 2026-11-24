@@ -1,0 +1,29 @@
+
+@model TraineeDashboardViewModel
+<!-- VIEW: WOCHENPLAN -->
+<div id="view-wochenplan" class="view">
+    <div class="stats-header">
+        <div>
+            <div class="main-eyebrow">Planung</div>
+            <h2 class="stats-title">Wochenplan</h2>
+        </div>
+        <div class="stats-note">
+            Geplante Bearbeitung der aktuellen und kommenden Lektionen.
+        </div>
+    </div>
+
+    <!-- Kalender-Toolbar -->
+    <div class="cal-header">
+        <div class="cal-nav">
+            <button class="cal-nav-btn" onclick="shiftWeek(-1)">&lt;</button>
+            <button class="cal-today-btn" onclick="goToToday()">Heute</button>
+            <button class="cal-nav-btn" onclick="shiftWeek(1)">&gt;</button>
+        </div>
+        <span id="cal-week-label" class="cal-week-label">@Model.WeeklyPlan.WeekLabel</span>
+    </div>
+
+    <div id="weekly-plan-container">
+        <partial name="_WeeklyPlanCalendar" model="Model.WeeklyPlan" />
+    </div>
+
+</div>

@@ -1,0 +1,230 @@
+/* Gemeinsame UI-Basis fuer normale MVC-Seiten: Admin, Feedback, Import und Login. */
+
+.stat-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.stat-card,
+.panel,
+.entry-card,
+.message {
+    background: var(--white);
+    border: 1px solid var(--grey1);
+}
+
+.stat-card {
+    padding: 18px;
+}
+
+.stat-card strong {
+    display: block;
+    font-size: 2rem;
+    line-height: 1;
+    margin-bottom: 8px;
+}
+
+.stat-card .pink {
+    color: var(--pink);
+}
+
+.panel {
+    padding: 24px;
+    margin-bottom: 22px;
+}
+
+.panel h2 {
+    font-size: 1.6rem;
+    margin-bottom: 4px;
+}
+
+.panel-header-row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 4px;
+}
+
+.entry-card {
+    padding: 20px;
+    margin-top: 16px;
+}
+
+.entry-card h3 {
+    font-size: 1.25rem;
+    margin: 0;
+}
+
+.entry-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.entry-card p {
+    color: var(--grey3);
+    margin-bottom: 14px;
+}
+
+.entry-card p:last-child {
+    margin-bottom: 0;
+}
+
+.entry-actions,
+.form-actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.entry-actions {
+    margin-top: 14px;
+}
+
+.form-actions {
+    margin-top: 8px;
+}
+
+.btn,
+.btn-primary,
+.btn-dark,
+.btn-outline-secondary,
+.btn-outline-dark {
+    box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 38px;
+    border-radius: 999px;
+    border: 1px solid transparent;
+    padding: 8px 16px;
+    font: 800 .9rem "Open Sans", Arial, sans-serif;
+    text-decoration: none;
+    cursor: pointer;
+    transition: color .2s ease, background .2s ease, border-color .2s ease, box-shadow .2s ease;
+}
+
+.btn:focus-visible,
+.btn-primary:focus-visible,
+.btn-dark:focus-visible,
+.btn-outline-secondary:focus-visible,
+.btn-outline-dark:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(255, 8, 68, .16);
+}
+
+.btn:disabled,
+.btn-primary:disabled,
+.btn-dark:disabled,
+.btn-outline-secondary:disabled,
+.btn-outline-dark:disabled {
+    opacity: .55;
+    cursor: not-allowed;
+}
+
+.btn-primary {
+    background: var(--pink);
+    border-color: var(--pink);
+    color: var(--white);
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+    background: #d90035;
+    border-color: #d90035;
+    color: var(--white);
+}
+
+.btn-dark {
+    background: var(--licorice);
+    border-color: var(--licorice);
+    color: var(--white);
+}
+
+.btn-dark:hover,
+.btn-dark:focus {
+    background: #2a2724;
+    border-color: #2a2724;
+    color: var(--white);
+}
+
+.btn-outline-secondary,
+.btn-outline-dark {
+    border-color: var(--grey2);
+    color: var(--licorice);
+    background: transparent;
+}
+
+.btn-outline-secondary:hover,
+.btn-outline-dark:hover {
+    background: var(--grey1);
+    border-color: var(--grey2);
+    color: var(--licorice);
+}
+
+.form-label {
+    font-weight: 700;
+}
+
+.form-control,
+.form-select {
+    width: 100%;
+    box-sizing: border-box;
+    border-radius: 8px;
+    border: 1px solid var(--grey2);
+    padding: 9px 12px;
+    font: inherit;
+}
+
+.form-control:focus,
+.form-select:focus {
+    outline: none;
+    border-color: var(--pink);
+    box-shadow: 0 0 0 0.2rem rgba(255, 8, 68, 0.15);
+}
+
+.message {
+    background: var(--white);
+    border: 1px solid var(--grey1);
+    padding: 20px;
+    margin-bottom: 22px;
+}
+
+.message.danger {
+    border-left: 4px solid var(--red);
+}
+
+.text-invalid,
+.field-validation-error {
+    color: var(--red);
+    font-size: .875rem;
+}
+
+.text-invalid {
+    margin-top: 4px;
+    display: block;
+}
+
+.input-validation-error {
+    border-color: var(--red) !important;
+}
+
+@media (max-width: 850px) {
+    .entry-top {
+        display: block;
+    }
+
+    .stat-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .panel-header-row {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}

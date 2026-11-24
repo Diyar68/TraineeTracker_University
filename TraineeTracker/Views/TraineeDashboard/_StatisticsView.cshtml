@@ -1,0 +1,132 @@
+@model TraineeDashboardViewModel
+
+@{
+    var display = Model.StatisticsDisplay;
+}
+
+<!-- VIEW: STATISTIK -->
+<div id="view-statistik" class="view">
+    <div class="stats-view">
+        <div class="stats-header">
+            <div>
+                <div class="main-eyebrow">Fortschrittskontrolle</div>
+                <h2 class="stats-title">Statistik</h2>
+            </div>
+            <div class="stats-note">
+                Die Werte verwenden dieselbe PT-Berechnung wie das PT-Konto. Anwesend kommt aus der Arbeitszeit-API.
+            </div>
+        </div>
+
+        @if (!display.IsApiAvailable)
+        {
+            <div class="stats-note" role="status">
+                Arbeitszeitdaten konnten nicht geladen werden.
+            </div>
+        }
+
+        <div class="stats-card-grid">
+            <div class="stats-card">
+                <span>Anwesend</span>
+                <strong id="stats-attended">@display.AttendedText</strong>
+                <small>Fiktive Anwesenheitsdaten</small>
+            </div>
+            <div class="stats-card">
+                <span>Geschafft</span>
+                <strong id="stats-done">@display.DoneText</strong>
+                <small>gewichteter Fortschritt</small>
+            </div>
+            <div class="stats-card">
+                <span>Offen</span>
+                <strong id="stats-open">@display.OpenText</strong>
+                <small>restlicher relevanter Lehrplan</small>
+            </div>
+            <div class="stats-card">
+                <span>Puffer</span>
+                <strong id="stats-buffer" class="@display.BufferToneClass">
+                    @display.BufferText
+                </strong>
+                <small>Geschafft minus Anwesend</small>
+            </div>
+            <div class="stats-card">
+                <span>Geschwindigkeit</span>
+                <strong id="stats-velocity"
+                        class="@display.VelocityToneClass">
+                    @display.VelocityText
+                </strong>
+                <small>Geschafft geteilt durch Anwesend</small>
+            </div>
+            <div class="stats-card">
+                <span>Puffer-Prognose</span>
+                <strong id="stats-forecast"
+                        class="@display.ForecastToneClass">
+                    @display.ForecastText
+                </strong>
+                <small>bei aktueller Geschwindigkeit</small>
+            </div>
+        </div>
+
+        <div class="stats-panels">
+            <section class="stats-panel">
+                <div class="stats-panel-title">PT-Vergleich</div>
+                <div class="stats-bars">
+                    <div class="stats-bar-row">
+                        <div class="stats-bar-meta">
+                            <span>Anwesend</span>
+                            <strong id="stats-attended-bar-value">@display.AttendedText</strong>
+                            </div>
+                            <div class="stats-bar-track">
+                                <div id="stats-attended-bar" class="stats-bar-fill neutral"
+                                     style="width:@display.AttendedWidthCss%"></div>
+                            </div>
+                        </div>
+                        <div class="stats-bar-row">
+                            <div class="stats-bar-meta">
+                                <span>Geschafft</span>
+                                <strong id="stats-done-bar-value">@display.DoneText</strong>
+                            </div>
+                            <div class="stats-bar-track">
+                                <div id="stats-done-bar" class="stats-bar-fill positive"
+                                     style="width:@display.DoneWidthCss%"></div>
+                            </div>
+                        </div>
+                        <div class="stats-buffer-line">
+                            <span>Aktueller Puffer</span>
+                            <strong id="stats-buffer-inline"
+                                    class="@display.BufferToneClass">
+                                @display.BufferText
+                            </strong>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="stats-panel">
+                    <div class="stats-panel-title">Lehrplan-Fortschritt</div>
+                    <div class="stats-stack" aria-label="Geschafft und offen">
+                        <div id="stats-done-stack" class="stats-stack-done" style="width:@display.DoneShareCss%"></div>
+                        <div id="stats-open-stack" class="stats-stack-open" style="width:@display.OpenShareCss%"></div>
+                    </div>
+                    <div class="stats-legend">
+                        <span><i class="done"></i>Geschafft <strong
+                            id="stats-done-share">@display.DoneShareText</strong></span>
+                            <span><i class="open"></i>Offen <strong
+                                id="stats-open-share">@display.OpenShareText</strong></span>
+                            </div>
+                            <div class="stats-status-list">
+                                @foreach (var row in display.StatusRows)
+                                {
+                                    <div class="stats-status-row">
+                                        <span>@row.Label</span>
+                                        <strong id="demo@portfolio.example">@row.Count</strong>
+                                    </div>
+                                }
+                            </div>
+                        </section>
+                    </div>
+
+                    <div class="stats-info">
+                        <strong>Berechnung:</strong>
+                        Open und Started zählen mit 0 %, Finished mit 70 %, Rejected mit 80 %, Accepted und Rated mit 100 %.
+                        Skipped zählt nicht in den relevanten Lehrplan.
+                    </div>
+                </div>
+            </div>

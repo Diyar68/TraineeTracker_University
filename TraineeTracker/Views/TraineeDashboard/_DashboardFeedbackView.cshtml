@@ -1,0 +1,321 @@
+@model TraineeDashboardViewModel
+
+@{
+    var roleCookie = Context.Request.Cookies[AppConstants.Cookies.Role];
+    var demoRole = roleCookie == AppConstants.RoleValues.Mentor
+        ? AppConstants.RoleValues.Mentor
+        : roleCookie == AppConstants.RoleValues.Admin
+            ? AppConstants.RoleValues.Admin
+            : AppConstants.RoleValues.Trainee;
+}
+
+<!-- VIEW: FEEDBACK --> @* ← und hier *@
+<div id="view-feedback" class="view">
+    <div class="feedback-role-note" id="feedback-role-note">
+        Der Feedback-Bereich ist in der Demo für die Rolle Trainee sichtbar.
+    </div>
+
+    @{
+        var isFeedbackMentorView = demoRole == AppConstants.RoleValues.Mentor || demoRole == AppConstants.RoleValues.Admin;
+    }
+    <div class="feedback-shell" id="feedback-trainee-panel" style="@(demoRole == AppConstants.RoleValues.Trainee ? "" : "display:none")">
+        <div class="stats-header">
+            <div>
+                <div class="main-eyebrow">Feedback</div>
+                <h2 class="stats-title">Lektionsfeedback</h2>
+            </div>
+            <div class="stats-note">
+                Eigene Rückmeldungen verwalten und Erfahrungen anderer Trainees lesen.
+            </div>
+        </div>
+
+        <div class="feedback-tabs" role="tablist" aria-label="Feedback-Ansichten">
+            <button type="button" class="feedback-tab active" data-feedback-tab="own"
+                    onclick="switchFeedbackTab('own', this)">Mein Feedback</button>
+            <button type="button" class="feedback-tab" data-feedback-tab="others"
+                    onclick="switchFeedbackTab('others', this)">Feedback anderer</button>
+        </div>
+
+        <section id="feedback-tab-own" class="feedback-panel active">
+            <div class="feedback-section">
+                <div class="feedback-section-head">
+                    <div>
+                        <h3>Feedback abgeben</h3>
+                        <p>Akzeptierte Lektionen können auch mit leerem Feedback bewertet werden.</p>
+                    </div>
+                    <span class="feedback-count">@Model.Feedback.AcceptedLessons.Count offen</span>
+                </div>
+
+                @if (Model.Feedback.AcceptedLessons.Any())
+                {
+                    <div class="feedback-grid-list">
+                        @foreach (var item in Model.Feedback.AcceptedLessons)
+                        {
+                            <form class="feedback-card feedback-form-card" data-feedback-create-form novalidate
+                                  data-lection-id="@item.Lection.Id" data-lection-title="@item.Lection.Title">
+                                <div class="feedback-card-top">
+                                    <div>
+                                        <h4>@item.Lection.Title</h4>
+                                    </div>
+                                    <span class="feedback-status">Akzeptiert</span>
+                                </div>
+                                <div class="feedback-form-grid">
+                                    <label>
+                                        Schwierigkeit
+                                        <select name="difficulty">
+                                            <option value="">Keine Angabe</option>
+                                            <option value="leicht">leicht</option>
+                                            <option value="mittel">mittel</option>
+                                            <option value="schwer">schwer</option>
+                                        </select>
+                                    </label>
+                                    <label>
+                                        Aufwand
+                                        <input name="effort" type="number" min="0" step="0.5" placeholder="PT" />
+                                    </label>
+                                </div>
+                                <label>
+                                    Vorkenntnisse
+                                    <input name="priorKnowledge" type="text" placeholder="optional" />
+                                </label>
+                                <label>
+                                    Anmerkung
+                                    <textarea name="comment" rows="3" placeholder="optional"></textarea>
+                                </label>
+                                <div class="feedback-actions">
+                                    <button type="submit" class="feedback-btn primary">Feedback speichern</button>
+                                </div>
+                            </form>
+                        }
+                    </div>
+                }
+                else
+                {
+                    <div class="feedback-empty">Aktuell wartet keine akzeptierte Lektion auf Feedback.</div>
+                }
+            </div>
+
+            <div class="feedback-section">
+                <div class="feedback-section-head">
+                    <div>
+                        <h3>Mein Feedback</h3>
+                        <p>Eigene Einträge können geändert oder gelöscht werden.</p>
+                    </div>
+                    <span class="feedback-count">@Model.Feedback.OwnFeedback.Count Einträge</span>
+                </div>
+
+                <div class="feedback-grid-list" id="own-feedback-list">
+                    @foreach (var entry in Model.Feedback.OwnFeedback)
+                    {
+                        <article class="feedback-card own-feedback-card" data-feedback-id="@entry.Id"
+                                 data-lection-id="@entry.LectionId">
+                            <div class="feedback-card-view">
+                                <div class="feedback-card-top">
+                                    <div>
+                                        <div class="feedback-date">@entry.SubmittedAt.ToString("dd.MM.yyyy")</div>
+                                        <h4>@entry.LessonTitle</h4>
+                                    </div>
+                                    <span class="feedback-status">Bewertet</span>
+                                </div>
+                                <div class="feedback-meta">
+                                    <span>@(string.IsNullOrWhiteSpace(entry.Difficulty) ? "Keine Schwierigkeit" : entry.Difficulty)</span>
+                                    <span>@(entry.ActualEffortDays > 0 ? $"{entry.ActualEffortDays:0.#} PT" : "Kein Aufwand")</span>
+                                    <span class="feedback-prior-knowledge"><strong>Vorkenntnisse:</strong> @(string.IsNullOrWhiteSpace(entry.PriorKnowledge) ? "Keine Angabe" : entry.PriorKnowledge)</span>
+                                </div>
+                                <p>@(string.IsNullOrWhiteSpace(entry.Comment) ? "Keine Anmerkung." : entry.Comment)</p>
+                                <div class="feedback-actions">
+                                    <button type="button" class="feedback-btn" onclick="editFeedbackCard(this)">Bearbeiten</button>
+                                    <button type="button" class="feedback-btn danger" onclick="deleteFeedbackCard(this)">Löschen</button>
+                                </div>
+                            </div>
+                            <form class="feedback-card-edit" hidden novalidate>
+                                <div class="feedback-form-grid">
+                                    <label>
+                                        Schwierigkeit
+                                        <select name="difficulty">
+                                            <option value="">Keine Angabe</option>
+                                            @if (entry.Difficulty == "leicht")
+                                            {
+                                                <option value="leicht" selected>leicht</option>
+                                            }
+                                            else
+                                            {
+                                                <option value="leicht">leicht</option>
+                                            }
+                                            @if (entry.Difficulty == "mittel")
+                                            {
+                                                <option value="mittel" selected>mittel</option>
+                                            }
+                                            else
+                                            {
+                                                <option value="mittel">mittel</option>
+                                            }
+                                            @if (entry.Difficulty == "schwer")
+                                            {
+                                                <option value="schwer" selected>schwer</option>
+                                            }
+                                            else
+                                            {
+                                                <option value="schwer">schwer</option>
+                                            }
+                                        </select>
+                                    </label>
+                                    <label>
+                                        Aufwand
+                                        <input name="effort" type="number" min="0" step="0.5" value="@(entry.ActualEffortDays > 0 ? entry.ActualEffortDays.ToString("0.#", System.Globalization.CultureInfo.InvariantCulture) : "")" />
+                                    </label>
+                                </div>
+                                <label>
+                                    Vorkenntnisse
+                                    <input name="priorKnowledge" type="text" value="@entry.PriorKnowledge" />
+                                </label>
+                                <label>
+                                    Anmerkung
+                                    <textarea name="comment" rows="3">@entry.Comment</textarea>
+                                </label>
+                                <div class="feedback-actions">
+                                    <button type="button" class="feedback-btn primary" onclick="saveFeedbackCard(this)">Speichern</button>
+                                    <button type="button" class="feedback-btn" onclick="cancelFeedbackEdit(this)">Abbrechen</button>
+                                </div>
+                            </form>
+                        </article>
+                    }
+                </div>
+            </div>
+        </section>
+
+        <section id="feedback-tab-others" class="feedback-panel">
+            <div class="feedback-section">
+                <div class="feedback-section-head">
+                    <div>
+                        <h3>Feedback anderer Trainees</h3>
+                        <p>Diese Einträge sind nur lesbar.</p>
+                    </div>
+                    <span class="feedback-count">@Model.Feedback.OthersFeedback.Count Einträge</span>
+                </div>
+
+                <div class="feedback-grid-list">
+                    @foreach (var entry in Model.Feedback.OthersFeedback)
+                    {
+                        <article class="feedback-card">
+                            <div class="feedback-card-top">
+                                <div>
+                                    <div class="feedback-date">@entry.TraineeName · @entry.SubmittedAt.ToString("dd.MM.yyyy")</div>
+                                    <h4>@entry.LessonTitle</h4>
+                                </div>
+                                <span class="feedback-status readonly">Nur lesen</span>
+                            </div>
+                            <div class="feedback-meta">
+                                <span>@(string.IsNullOrWhiteSpace(entry.Difficulty) ? "Keine Schwierigkeit" : entry.Difficulty)</span>
+                                <span>@(entry.ActualEffortDays > 0 ? $"{entry.ActualEffortDays:0.#} PT" : "Kein Aufwand")</span>
+                                <span class="feedback-prior-knowledge"><strong>Vorkenntnisse:</strong> @(string.IsNullOrWhiteSpace(entry.PriorKnowledge) ? "Keine Angabe" : entry.PriorKnowledge)</span>
+                            </div>
+                            <p>@(string.IsNullOrWhiteSpace(entry.Comment) ? "Keine Anmerkung." : entry.Comment)</p>
+                        </article>
+                    }
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div class="feedback-shell" id="feedback-mentor-panel" style="@(isFeedbackMentorView ? "" : "display:none")">
+        <div class="stats-header">
+            <div>
+                <div class="main-eyebrow">Feedback</div>
+                <h2 class="stats-title">Mentor-Feedback</h2>
+            </div>
+            <div class="stats-note">
+                Feedback der zugewiesenen Trainees einsehen, ändern und löschen.
+            </div>
+        </div>
+
+        <section class="feedback-panel active">
+            <div class="feedback-section">
+                <div class="feedback-section-head">
+                    <div>
+                        <h3>Zugewiesene Trainees</h3>
+                        <p>Mentoren können diese Feedback-Einträge bearbeiten oder entfernen.</p>
+                    </div>
+                    <span class="feedback-count">@Model.Feedback.MentorFeedback.Count Einträge</span>
+                </div>
+
+                <div class="feedback-grid-list" id="mentor-feedback-list">
+                    @foreach (var entry in Model.Feedback.MentorFeedback)
+                    {
+                        <article class="feedback-card mentor-feedback-card" data-feedback-id="@entry.Id">
+                            <div class="feedback-card-view">
+                                <div class="feedback-card-top">
+                                    <div>
+                                        <div class="feedback-date">@entry.TraineeName · @entry.SubmittedAt.ToString("dd.MM.yyyy")</div>
+                                        <h4>@entry.LessonTitle</h4>
+                                    </div>
+                                    <span class="feedback-status">Bewertet</span>
+                                </div>
+                                <div class="feedback-meta">
+                                    <span>@(string.IsNullOrWhiteSpace(entry.Difficulty) ? "Keine Schwierigkeit" : entry.Difficulty)</span>
+                                    <span>@(entry.ActualEffortDays > 0 ? $"{entry.ActualEffortDays:0.#} PT" : "Kein Aufwand")</span>
+                                    <span class="feedback-prior-knowledge"><strong>Vorkenntnisse:</strong> @(string.IsNullOrWhiteSpace(entry.PriorKnowledge) ? "Keine Angabe" : entry.PriorKnowledge)</span>
+                                </div>
+                                <p>@(string.IsNullOrWhiteSpace(entry.Comment) ? "Keine Anmerkung." : entry.Comment)</p>
+                                <div class="feedback-actions">
+                                    <button type="button" class="feedback-btn" onclick="editFeedbackCard(this)">Bearbeiten</button>
+                                    <button type="button" class="feedback-btn danger" onclick="deleteFeedbackCard(this)">Löschen</button>
+                                </div>
+                            </div>
+                            <form class="feedback-card-edit" hidden novalidate>
+                                <div class="feedback-form-grid">
+                                    <label>
+                                        Schwierigkeit
+                                        <select name="difficulty">
+                                            <option value="">Keine Angabe</option>
+                                            @if (entry.Difficulty == "leicht")
+                                            {
+                                                <option value="leicht" selected>leicht</option>
+                                            }
+                                            else
+                                            {
+                                                <option value="leicht">leicht</option>
+                                            }
+                                            @if (entry.Difficulty == "mittel")
+                                            {
+                                                <option value="mittel" selected>mittel</option>
+                                            }
+                                            else
+                                            {
+                                                <option value="mittel">mittel</option>
+                                            }
+                                            @if (entry.Difficulty == "schwer")
+                                            {
+                                                <option value="schwer" selected>schwer</option>
+                                            }
+                                            else
+                                            {
+                                                <option value="schwer">schwer</option>
+                                            }
+                                        </select>
+                                    </label>
+                                    <label>
+                                        Aufwand
+                                        <input name="effort" type="number" min="0" step="0.5" value="@(entry.ActualEffortDays > 0 ? entry.ActualEffortDays.ToString("0.#", System.Globalization.CultureInfo.InvariantCulture) : "")" />
+                                    </label>
+                                </div>
+                                <label>
+                                    Vorkenntnisse
+                                    <input name="priorKnowledge" type="text" value="@entry.PriorKnowledge" />
+                                </label>
+                                <label>
+                                    Anmerkung
+                                    <textarea name="comment" rows="3">@entry.Comment</textarea>
+                                </label>
+                                <div class="feedback-actions">
+                                    <button type="button" class="feedback-btn primary" onclick="saveFeedbackCard(this)">Speichern</button>
+                                    <button type="button" class="feedback-btn" onclick="cancelFeedbackEdit(this)">Abbrechen</button>
+                                </div>
+                            </form>
+                        </article>
+                    }
+                </div>
+            </div>
+        </section>
+    </div>
+</div>

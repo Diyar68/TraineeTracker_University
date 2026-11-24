@@ -1,0 +1,94 @@
+
+/* ═══════════════════════════════════════════════════════
+   LESSON CARDS
+═══════════════════════════════════════════════════════ */
+.lesson-group  { margin-bottom: 36px; }
+.group-title {
+  font-family: var(--ui); font-size: 10px; font-weight: 600;
+  letter-spacing: .14em; text-transform: uppercase; color: var(--gray3);
+  margin-bottom: 12px; display: flex; align-items: center; gap: 10px;
+}
+.group-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+.lessons-list { display: flex; flex-direction: column; gap: 3px; }
+
+.lesson-card {
+  background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
+  padding: 16px 20px; display: grid; grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center; gap: 16px; cursor: pointer;
+  transition: background .15s, border-color .15s, transform .15s, opacity .3s;
+  position: relative; overflow: hidden;
+}
+.lesson-card::before {
+  content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
+  border-radius: 3px 0 0 3px; opacity: 0; transition: opacity .15s;
+}
+.lesson-card:hover              { background: var(--bg3); border-color: #3a3a3a; transform: translateX(2px); }
+.lesson-card:hover::before      { opacity: 1; }
+.lesson-card.rejected::before   { background: var(--red);    opacity: 1; }
+.lesson-card.finished::before   { background: var(--blue);   opacity: 1; }
+.lesson-card.accepted::before   { background: var(--green);  opacity: 1; }
+.lesson-card.started::before    { background: var(--amber);  opacity: 1; }
+.lesson-card.rated::before      { background: var(--purple); opacity: 1; }
+.lesson-card.skipped            { opacity: .45; }
+.lesson-card.skipped::before    { background: var(--gray3);  opacity: 1; }
+
+.lesson-body   { min-width: 0; }
+.lesson-title  { font-family: var(--body); font-weight: 700; font-size: 14px; color: var(--gray1); margin-bottom: 3px; line-height: 1.3; }
+.lesson-meta   { display: flex; align-items: center; gap: 10px; font-family: var(--ui); font-size: 11px; color: var(--gray3); }
+.lesson-right  { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; }
+.lesson-effort { font-family: var(--ui); font-size: 10px; color: var(--gray3); }
+
+/* Badges */
+.badge { display: inline-flex; align-items: center; gap: 5px; padding: 4px 10px; border-radius: 99px; font-family: var(--ui); font-size: 10px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; white-space: nowrap; }
+.badge-dot { width: 5px; height: 5px; border-radius: 50%; }
+.badge.open     { background: rgba(80,80,80,.3);     color: #888;          border: 1px solid var(--border); }
+.badge.open     .badge-dot { background: #888; }
+.badge.started  { background: rgba(245,158,11,.15);  color: var(--amber);  border: 1px solid rgba(245,158,11,.3); }
+.badge.started  .badge-dot { background: var(--amber); }
+.badge.finished { background: rgba(59,130,246,.15);  color: #60a5fa;       border: 1px solid rgba(59,130,246,.3); }
+.badge.finished .badge-dot { background: #60a5fa; }
+.badge.accepted { background: rgba(34,197,94,.15);   color: var(--green);  border: 1px solid rgba(34,197,94,.3); }
+.badge.accepted .badge-dot { background: var(--green); }
+.badge.rejected { background: rgba(232,24,74,.15);   color: #f87195;       border: 1px solid rgba(232,24,74,.3); }
+.badge.rejected .badge-dot { background: #f87195; }
+.badge.rated    { background: rgba(168,85,247,.15);  color: #c084fc;       border: 1px solid rgba(168,85,247,.3); }
+.badge.rated    .badge-dot { background: #c084fc; }
+.badge.skipped  { background: rgba(85,85,85,.15);    color: #777;          border: 1px solid rgba(85,85,85,.3); }
+.badge.skipped  .badge-dot { background: #777; }
+
+/* Rejection-Note in Karte */
+.rejection-note {
+  grid-column: 1 / -1;
+  background: rgba(232,24,74,.08); border: 1px solid rgba(232,24,74,.2);
+  border-radius: 6px; padding: 8px 12px;
+  font-family: var(--ui); font-size: 11px; color: #f87195;
+  line-height: 1.5; display: flex; gap: 8px; align-items: flex-start;
+}
+
+/* Empty state */
+#empty-state {
+  text-align: center; padding: 64px;
+  color: var(--gray3); font-family: var(--ui); font-size: 13px;
+}
+
+
+@media (max-width: 680px) {
+  .lesson-card {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+    padding: 15px 16px;
+  }
+
+  .lesson-right {
+    grid-column: 1;
+    align-items: flex-start;
+  }
+
+  .lesson-meta {
+    flex-wrap: wrap;
+  }
+
+  .rejection-note {
+    grid-column: 1 / -1;
+  }
+}

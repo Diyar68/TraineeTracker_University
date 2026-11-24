@@ -1,0 +1,107 @@
+
+@model TraineeDashboardViewModel
+@using TraineeTracker.Helpers
+
+@{
+    var display = Model.StatisticsDisplay;
+}
+
+<!-- ═══════════════════════════════════════════════════
+     SIDEBAR
+     Alle Kennzahlen werden als data-Attribute gerendert.
+     JavaScript liest sie aus — keine Berechnung im Frontend.
+═══════════════════════════════════════════════════════ -->
+<aside class="sidebar" data-total="@Model.Stats.TotalCount" data-rated="@Model.Stats.RatedCount"
+       data-pct="@Model.Stats.ProgressPercent" data-done-pt="@Model.Stats.DonePT.ToString("0.0")"
+       data-open-pt="@Model.Stats.OpenPT.ToString("0.0")" data-buffer-pt="@(Model.Stats.BufferPT?.ToString("0.0") ?? "")"
+       data-buffer-neg="@(Model.Stats.BufferPT < 0 ? "true" : "false")"
+       data-attended-pt="@(Model.Stats.AttendedPT?.ToString("0.0") ?? "")" data-velocity="@(Model.Stats.VelocityPercent?.ToString("0.#") ?? "")"
+       data-forecast-buffer-pt="@(Model.Stats.ForecastBufferPT?.ToString("0.0") ?? "")"
+       data-forecast-buffer-neg="@(Model.Stats.ForecastBufferPT < 0 ? "true" : "false")"
+       data-attended-text="@display.AttendedText" data-done-text="@display.DoneText" data-open-text="@display.OpenText"
+       data-buffer-text="@display.BufferText" data-buffer-tone-class="@display.BufferToneClass"
+       data-velocity-text="@display.VelocityText" data-velocity-tone-class="@display.VelocityToneClass"
+       data-forecast-text="@display.ForecastText" data-forecast-tone-class="@display.ForecastToneClass"
+       data-nav-buffer-text="@(Model.Stats.BufferPT is decimal buffer ? $"{(buffer < 0 ? "−" : "+")}{Math.Abs(buffer):0.0} PT" : "–")"
+       data-nav-buffer-class="@(Model.Stats.BufferPT < 0 ? "puffer-val neg" : "puffer-val")">
+
+    <div class="sidebar-section reveal">
+        <div class="sidebar-label">Dein Fortschritt</div>
+        <div class="progress-block">
+            <div class="progress-top">
+                <div class="ring-wrap">
+                    <svg width="54" height="54" viewBox="0 0 54 54">
+                        <circle class="ring-bg" cx="27" cy="27" r="22" />
+                        <circle class="ring-fill" id="progress-ring" cx="27" cy="27" r="22" />
+                    </svg>
+                    <div class="ring-text" id="progress-pct">0%</div>
+                </div>
+                <div class="progress-meta">
+                    <h3>Lehrplan</h3>
+                    <span id="progress-label">0 von 0 Lektionen</span>
+                </div>
+            </div>
+            <div class="progress-bar-wrap">
+                <div id="progress-bar" class="progress-bar-fill" style="width:0%"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="sidebar-section reveal d1">
+        <div class="sidebar-label pt-label">
+            <span>PT-Konto</span>
+            <button type="button" class="pt-info-btn" aria-label="Info zum PT-Konto" aria-expanded="false"
+                    aria-controls="pt-info-overlay">
+                <span aria-hidden="true">i</span>
+            </button>
+        </div>
+        <ul class="stat-list">
+            <li class="stat-row">
+                <span class="stat-row-label">Anwesend</span>
+                <span id="stat-anwesend" class="stat-row-val"></span>
+            </li>
+            <li class="stat-row">
+                <span class="stat-row-label">Geschafft</span>
+                <span id="stat-geschafft" class="stat-row-val green"></span>
+            </li>
+            <li class="stat-row">
+                <span class="stat-row-label">Offen</span>
+                <span id="stat-offen" class="stat-row-val"></span>
+            </li>
+            <li class="stat-row">
+                <span class="stat-row-label">Puffer</span>
+                <span id="stat-puffer" class="stat-row-val"></span>
+            </li>
+            <li class="stat-row">
+                <span class="stat-row-label">Geschwindigkeit</span>
+                <span id="stat-geschwindigkeit" class="stat-row-val"></span>
+            </li>
+            <li class="stat-row">
+                <span class="stat-row-label">Puffer-Prognose</span>
+                <span id="stat-prognose" class="stat-row-val"></span>
+            </li>
+        </ul>
+    </div>
+
+    <div class="sidebar-section reveal d2" id="sidebar-status-filter">
+        <div class="sidebar-label">Status-Filter</div>
+        <div class="filter-list">
+            <div class="filter-item status-all active" data-label="Alle" onclick="setFilter(this, 'all')">
+                <span>Alle</span>
+                <span class="filter-count" id="fc-all">@Model.Stats.TotalCount</span>
+            </div>
+
+            @foreach (var status in Enum.GetValues<LectionStatus>())
+            {
+                var count = Model.Stats.CountByStatus.GetValueOrDefault(status, 0);
+                var cssKey = status.ToString().ToLower();
+                <div class="filter-item status-@cssKey" data-label="@status.DisplayName()"
+                     onclick="setFilter(this, '@cssKey')">
+                    <span>@status.DisplayName()</span>
+                    <span class="filter-count" id="fc-@cssKey">@count</span>
+                </div>
+            }
+        </div>
+
+    </div>
+</aside>

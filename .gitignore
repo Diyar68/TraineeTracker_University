@@ -1,0 +1,196 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+.Icon?
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Linux
+*~
+.directory
+
+# .NET build output
+[Bb]in/
+[Oo]bj/
+**/[Bb]in/
+**/[Oo]bj/
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]uild/
+[Oo]ut/
+artifacts/
+.artifacts/
+
+# Visual Studio
+.vs/
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.userprefs
+*.tmp
+*.tmp_proj
+*.cache
+*.ilk
+*.meta
+*.obj
+*.idb
+*.iobj
+*.pch
+*.pdb
+*.ipdb
+*.pgc
+*.pgd
+*.rsp
+!Directory.Build.rsp
+*.sbr
+*.tlb
+*.tli
+*.tlh
+*.tlog
+*.vspscc
+*.vssscc
+*.pidb
+*.svclog
+*.scc
+
+# Rider
+.idea/
+*.sln.iml
+*.DotSettings.user
+_ReSharper*/
+*.[Rr]e[Ss]harper
+
+# VS Code
+.vscode/
+.history/
+
+# ASP.NET Core local configuration
+appsettings.Local.json
+appsettings.*.Local.json
+appsettings.Production.json
+
+# ASP.NET Core launch profiles
+**/Properties/launchSettings.json
+!TraineeTracker/Properties/launchSettings.json
+
+# Local environment
+.env
+.env.*
+!.env.example
+secrets.json
+*.secret.json
+*.secrets.json
+
+# Certificates and keys
+*.pfx
+*.p12
+*.pem
+*.key
+*.crt
+*.cer
+
+# Logs
+[Ll]og/
+[Ll]ogs/
+*.log
+*.binlog
+MSBuild_Logs/
+
+# Test results
+[Tt]est[Rr]esult*/
+TestResults/
+*.trx
+*.coverage
+*.coveragexml
+coverage/
+.coverage/
+coverage*.json
+coverage*.xml
+coverage*.info
+coverage.cobertura.xml
+nunit-*.xml
+TestResult.xml
+
+# NuGet
+*.nupkg
+*.snupkg
+packages/
+**/[Pp]ackages/*
+!packages/build/
+!**/[Pp]ackages/build/
+.nuget/packages/
+*.nuget.props
+*.nuget.targets
+
+# .NET generated files
+project.lock.json
+project.fragment.lock.json
+Generated\ Files/
+ScaffoldingReadMe.txt
+StyleCopReport.xml
+
+# Publish output
+[Pp]ublish/
+*.[Pp]ublish.xml
+*.azurePubxml
+*.pubxml
+*.publishproj
+*.publishsettings
+PublishScripts/
+
+# SQLite and local databases
+*.db
+*.db-shm
+*.db-wal
+*.sqlite
+*.sqlite3
+*.sqlite-shm
+*.sqlite-wal
+*.mdf
+*.ldf
+*.ndf
+*.lscache
+
+# Frontend dependencies and build output
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+dist/
+build/
+wwwroot/dist/
+wwwroot/build/
+
+# Local history
+.localhistory/
+.vshistory/
+
+# Backup files
+Backup*/
+MigrationBackup/
+_UpgradeReport_Files/
+UpgradeLog*.XML
+UpgradeLog*.htm
+*-backup.*
+*.bak
+
+_import_source/
+TraineeTracker_BACKUP_*/
