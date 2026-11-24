@@ -1,200 +1,246 @@
 # Trainee Tracker
 
-## Project Overview
+A role-based training management application for planning lessons, visualizing
+learning progress and coordinating feedback between trainees, mentors and administrators.
 
-Trainee Tracker is an ASP.NET Core MVC application for organizing a training
-curriculum, following learning progress and coordinating feedback between
-trainees and mentors. Administrators manage users and mentor assignments.
+**[Open the live demo →](https://trainee-tracker-demo.onrender.com/)**
 
-The application originated as a collaborative university software engineering
-project. This deployment restores the original interface and business workflows
-with isolated synthetic datasets for public exploration.
+![C#](https://img.shields.io/badge/C%23-512BD4?style=flat)
+![.NET 10](https://img.shields.io/badge/.NET%2010-512BD4?style=flat)
+![ASP.NET Core MVC](https://img.shields.io/badge/ASP.NET%20Core%20MVC-512BD4?style=flat)
+![Entity Framework Core](https://img.shields.io/badge/Entity%20Framework%20Core-512BD4?style=flat)
+![SQLite](https://img.shields.io/badge/SQLite-003B57?style=flat)
+![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat)
+
+Developed as a university team project in the Computer Science program at the
+**University of Augsburg**, for **Makandra**. This portfolio deployment preserves
+the original application's interface and business workflows with synthetic data.
 
 ## Live Demo
 
-**[Open Trainee Tracker](https://trainee-tracker-demo.onrender.com)**
-
-The updated implementation has been verified locally. Verification of this
-revision at the live URL is pending deployment.
-Render Free may need time to wake the service after inactivity.
-
-Each browser receives its own SQLite sandbox for up to two hours. Switching
-accounts in the same browser preserves that sandbox, allowing you to complete
-a trainee-to-mentor review workflow. Separate browser profiles or private windows
-provide independent datasets. Use **Demo zurücksetzen** to restore the initial
-dataset and return to login. Please enter fictional data only.
-
-## Demo Credentials
+### Demo credentials
 
 | Role | Email | Password |
 | --- | --- | --- |
-| Trainee | trainee@demo.example | TraineeDemo!2026 |
-| Mentor | mentor@demo.example | MentorDemo!2026 |
-| Administrator | admin@demo.example | AdminDemo!2026 |
+| Trainee | [trainee@demo.example](mailto:trainee@demo.example) | TraineeDemo!2026 |
+| Mentor | [mentor@demo.example](mailto:mentor@demo.example) | MentorDemo!2026 |
+| Administrator | [admin@demo.example](mailto:admin@demo.example) | AdminDemo!2026 |
 
-These public credentials exist only in the disposable demo datasets.
-The administrator manages application users, assignments and curriculum in the
-current sandbox. The application exposes no infrastructure management interface.
+All three roles can be explored interactively. Each visitor receives an isolated
+demo environment, so changes stay within their own dataset. All demo data is synthetic.
 
-## Features
+Use **Demo zurücksetzen** to reset the environment at any time. Sessions expire
+after two hours. Switching accounts in the same browser preserves the dataset,
+allowing a complete trainee-to-mentor review workflow. Separate browser profiles
+or private windows provide independent environments.
 
-- Trainee dashboard with searchable lessons, status filters and individually persisted lesson ordering.
-- Progress workflow for starting, submitting, reviewing, accepting, rejecting, rating and skipping lessons according to the original role rules.
-- Weekly plan with the original calendar and lesson views.
-- Progress visualization with weighted completion, status distribution, person-day metrics, attendance, buffer and projections.
-- Mentor overview with assigned trainees, attention indicators, trainee selection and progress review.
-- Feedback creation, editing and deletion with ownership and assignment checks.
-- User administration with account creation, editing, closure, reopening, training dates and mentor assignments.
-- Curriculum management through JSON import, including creation, updates and deprecation of omitted lessons.
-- Demo reset that restores the full synthetic starting dataset.
+The first request may take longer while Render's free service wakes up.
+Please enter fictional data only.
 
-The original project provides account closure/reopening and curriculum import.
-It contains no standalone account hard-delete, lesson-editing CRUD screen or
-export feature. Its available workflows are preserved.
+**Availability checked on 24 November 2026:** the live login page returned HTTP 200.
+Interactive workflows have been tested locally; full live workflow verification
+is pending.
 
 ## Screenshots
 
-Captured from the restored local application with synthetic data.
+Captured from the local application using synthetic data.
 
-### Trainee dashboard
+### Personal dashboard
+
+Searchable lessons, status filters and an overview of individual progress.
 
 ![Trainee dashboard](docs/screenshots/trainee-dashboard.png)
 
 ### Learning progress
 
+Weighted completion, attendance, person-day metrics and status distribution.
+
 ![Learning progress statistics](docs/screenshots/progress-statistics.png)
 
-### Weekly plan
+### Weekly planning
+
+A calendar view of planned lessons and their estimated effort.
 
 ![Weekly plan](docs/screenshots/weekly-plan.png)
 
 ### Mentor overview
 
+Assigned trainees, progress indicators and recent feedback.
+
 ![Mentor overview](docs/screenshots/mentor-overview.png)
 
 ### User administration
 
+Accounts, training dates and mentor assignments in the administrative dashboard.
+
 ![User administration](docs/screenshots/user-administration.png)
+
+## Features
+
+### Trainee
+
+- Personal dashboard with search, status filters and saved lesson ordering.
+- Learning progress tracking through role-authorized lesson status transitions.
+- Weekly planning and access to the curriculum and lesson details.
+- Feedback overview with creation, editing and deletion of personal feedback.
+- Attendance overview using locally generated training data.
+
+### Mentor
+
+- Overview of assigned trainees and switching between their dashboards.
+- Progress monitoring, lesson review and role-authorized status changes.
+- Feedback management for assigned trainees.
+- Statistics, attendance metrics and weekly plans for selected trainees.
+- Curriculum management through the JSON import available to mentors and administrators.
+
+### Administrator
+
+- User management with account creation, editing, closure and reopening.
+- Mentor assignments and training-period management.
+- Curriculum import with lesson creation, updates and deprecation of omitted entries.
+- Administrative overview and access to trainee progress and feedback workflows.
 
 ## My Contribution
 
-My main contribution to the original team project was developing the dashboard
-and the visualization of learning progress. This included presenting training
-status and progress information in a structured interface that helps trainees
-and mentors understand the current learning state.
+### Original university project
 
-The application was built collaboratively. Other team members contributed across
-authentication, administration, curriculum handling, feedback, planning, testing
-and integration.
+My main contributions were **dashboard development** and **learning progress
+visualization**, presenting training status and progress information in a
+structured interface for trainees and mentors. This work was carried out in
+collaboration with the software development team.
+
+### Portfolio preparation
+
+The subsequent portfolio preparation includes:
+
+- An interactive demo environment for all three application roles.
+- Session-isolated SQLite databases with a reset workflow.
+- Synthetic users, curriculum, feedback and attendance data.
+- Docker-based deployment for Render Free.
+- Security and deployment improvements covering authentication, authorization,
+  antiforgery, login rate limiting and health checks.
 
 ## Tech Stack
 
-| Area | Technology |
+| Category | Technology |
 | --- | --- |
-| Application | C#, .NET 10, ASP.NET Core MVC |
-| User interface | Razor views, CSS, JavaScript, Fetch API |
-| Persistence | Entity Framework Core 10, SQLite |
-| Authentication | ASP.NET Core cookies, PBKDF2 password hashing |
-| Tests | xUnit, Python HTTP tests, Chrome browser smoke checks |
-| Deployment | Multi-stage Docker build, non-root runtime, Render Free |
+| Programming Language | C# |
+| Backend | .NET 10, ASP.NET Core MVC |
+| Frontend | Razor views, CSS, JavaScript, Fetch API |
+| ORM | Entity Framework Core 10 |
+| Database | SQLite |
+| Authentication | ASP.NET Core cookie authentication, PBKDF2 password hashing |
+| Testing | xUnit, Python HTTP integration tests, Chrome browser smoke tests |
+| Containerization | Multi-stage Docker build with a non-root runtime |
+| Hosting | Render Free |
 
 ## Architecture
 
-    Browser
-      │ Razor views and AJAX requests
-      ▼
-    ASP.NET Core MVC
-      ├── Authentication, role filters and antiforgery
-      ├── Controllers and application services
-      ├── Repositories and Entity Framework Core
-      └── Separate SQLite database for this browser session
+The application follows the MVC pattern. Controllers handle page requests and
+AJAX actions, Razor views render the interface, and application services contain
+the training workflows. Repositories use Entity Framework Core for persistence.
 
-    Startup → migrate and seed template → copy template for each new sandbox
+    Browser → MVC controllers → Application services → Repositories → SQLite
+                   ↓
+               Razor views
 
-The schema, migration, repositories and business rules come from the original
-university application. Each sandbox starts with **62 lessons, six users,
-four mentor assignments, 186 progress records and 56 feedback records**.
-There are three trainees, two mentors and one administrator. The seed retains
-the original relationships, lesson order, estimates, deprecation flags and
-progress distribution. Names, credentials, curriculum titles, links and feedback
-text are synthetic. Training dates move relative to the current date while
-preserving their original offsets and durations.
+At startup, the application migrates and seeds a template database. Each visitor
+receives a separate copy, keeping administrative changes, imports and feedback
+isolated from other visitors. Authentication cookies are bound to that environment.
+Resetting creates a fresh environment; restarting the service invalidates existing sessions.
 
-Attendance comes from a deterministic local service with weekdays, fictional
-leave and half-days. No company API client is registered. Seed lesson links open local fictional
-exercise pages in place of the external company card deck. Original styling and
-branding assets are retained to restore the university application's appearance.
-
-Sandbox IDs are random and protected with ASP.NET Core Data Protection.
-Authentication cookies are bound to their sandbox. Requests within each sandbox
-are serialized. Production cookies use Secure, HttpOnly and SameSite=Lax.
-Mutations require antiforgery tokens, and login attempts are rate-limited.
-Behind Render, the IP-based login limit may be shared by visitors.
-
-Expired sandboxes are cleaned up on subsequent requests. The instance supports
-up to 64 concurrent sandboxes and request bodies up to 2 MiB to bound resource
-use on free hosting. A restart invalidates previous cookies and starts with
-fresh data. No persistent volume or paid service is required.
+Each environment starts with **62 lessons, six users, four mentor assignments,
+186 progress records and 56 feedback records**. Attendance and lesson content use
+local synthetic replacements for the original company integrations.
 
 ## Getting Started
 
-### Run locally
+### Prerequisites
 
-Install the .NET 10 SDK and run from the repository root:
+- .NET 10 SDK for local development.
+- Git.
+- Docker for the container setup.
+- Python 3 for the HTTP integration tests.
 
-    Demo__Enabled=true ASPNETCORE_ENVIRONMENT=Development PORT=10000 dotnet run --no-launch-profile --project TraineeTracker
+The commands below use a Bash-compatible shell.
 
-Open [localhost:10000](http://localhost:10000). This isolated deployment requires
-Demo__Enabled=true and never opens the original local development database.
+### Clone the portfolio branch
 
-### Docker
+    git clone --branch portfolio-demo --single-branch https://github.com/Diyar68/TraineeTracker_University.git
+    cd TraineeTracker_University
+
+The clone checks out the deployment branch directly.
+
+### Local development
+
+Run from the repository root:
+
+    Demo__Enabled=true ASPNETCORE_ENVIRONMENT=Development PORT=10000       dotnet run --no-launch-profile --project TraineeTracker
+
+Open [http://localhost:10000](http://localhost:10000).
+
+### Docker setup
 
     docker build -t trainee-tracker .
-    docker run --rm -p 10000:10000 -e Demo__Enabled=true -e ASPNETCORE_ENVIRONMENT=Development -e PORT=10000 trainee-tracker
+    docker run --rm -p 10000:10000       -e Demo__Enabled=true       -e ASPNETCORE_ENVIRONMENT=Development       -e PORT=10000       trainee-tracker
 
-Development is used here for local HTTP browsing. Production authentication
-cookies require browser HTTPS.
+Development mode supports direct local HTTP browsing. Production authentication
+cookies require HTTPS in the browser.
 
-### Render Free
+### Environment variables
 
-Use the existing repository's portfolio-demo branch with Docker runtime,
-repository-root build context and ./Dockerfile. Configure:
+| Variable | Local development | Render |
+| --- | --- | --- |
+| Demo__Enabled | true | true |
+| ASPNETCORE_ENVIRONMENT | Development | Production |
+| PORT | 10000 | 10000 |
+| RENDER | Leave unset | Set to true automatically by Render |
 
-    Demo__Enabled=true
-    ASPNETCORE_ENVIRONMENT=Production
-    PORT=10000
+The isolated deployment requires Demo__Enabled=true. It creates temporary
+databases and never opens the original development database.
 
-Set the health check to /healthz. Kestrel binds to 0.0.0.0:10000. Render sets
-RENDER=true and handles TLS termination and HTTP-to-HTTPS redirects at its edge.
-The application does not trust arbitrary forwarded headers.
+For Render, use the **portfolio-demo** branch, Docker runtime, repository-root
+build context and **./Dockerfile**. Set the health check to **/healthz**.
+Kestrel binds to **0.0.0.0:10000**, and Render handles TLS termination and
+HTTP-to-HTTPS redirection.
 
 ## Testing
 
+The latest local test run completed with **89 successful unit tests**.
+
     dotnet test TraineeTracker.UnitTests
+
+With a disposable demo running locally:
+
     python3 tests/functional_http.py http://127.0.0.1:10000
 
-The HTTP suite requires a disposable running demo. Add --proxy for Production
-tests behind a simulated TLS edge. This checks Secure authentication cookies
-while allowing the local test client to send them over HTTP.
+The HTTP integration suite checks:
 
-The suite covers three logins, authorization, antiforgery, user creation and
-editing, closure/reopening, lesson ordering, progress transitions, feedback CRUD,
-curriculum import, independent datasets and reset. Tests use synthetic fixtures.
-Browser smoke checks and screenshot capture are in tests/browser_smoke.mjs.
-Setup and limitations are documented in tests/README.md.
+- Authentication for all three roles, authorization and antiforgery protection.
+- User creation and editing, account closure and reopening.
+- Lesson ordering, progress transitions and feedback creation, editing and deletion.
+- Curriculum import, including lesson creation, updates and deprecation.
+- Demo session isolation, authentication-cookie binding and dataset reset.
+- Public and authenticated health checks.
 
-## Project Background and Credits
+For Production tests through a simulated local TLS edge, append --proxy. This
+checks secure cookies while allowing the test client to transmit them over local HTTP.
 
-This collaborative university project was originally developed with ASP.NET
-Core MVC, C# and Entity Framework Core. The original is preserved on
-integration-team-v2. Deployment adaptations are maintained on portfolio-demo.
+Browser smoke tests cover the three logins and the dashboard, statistics,
+weekly plan, mentor and administration views. Setup instructions are in
+[tests/README.md](tests/README.md).
 
-Source comments retain team authorship where present. My personal contribution
-focuses on the dashboard and learning-progress visualization. The deployment
-adds synthetic data, local attendance fixtures, per-browser database isolation
-and operational support for Render.
+## Project Background & Credits
 
-The project owner has confirmed the necessary publication permissions, including
-use of the retained company logos. No
-open-source license is defined in the repository. Credits and retained branding
-do not imply endorsement by the university or companies represented in the UI.
+Trainee Tracker was developed collaboratively as a software project in the
+Computer Science program at the **University of Augsburg**, for **Makandra**.
+
+The original team contributed across dashboard development, authentication,
+administration, curriculum handling, feedback, planning, testing and integration.
+My contribution focuses on the dashboard and learning progress visualization.
+Team authorship is retained in the source comments where present.
+
+The original project is preserved on **integration-team-v2**. The interactive
+portfolio deployment is maintained on **portfolio-demo**. Publication permissions,
+including use of the retained company logos, have been confirmed by the project
+owner. The repository currently defines no open-source license.
