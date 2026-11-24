@@ -19,7 +19,7 @@ public class AccountController : Controller
     }
 
     [HttpGet]
-    public IActionResult Login()
+    public IActionResult Login(bool sessionExpired = false)
     {
         if (User.Identity?.IsAuthenticated == true)
         {
@@ -28,6 +28,7 @@ public class AccountController : Controller
         }
 
         ViewData["Title"] = "Anmelden";
+        ViewData["SessionExpired"] = sessionExpired;
         return View(new LoginViewModel());
     }
 

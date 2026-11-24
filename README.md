@@ -206,7 +206,7 @@ HTTP-to-HTTPS redirection.
 
 ## Testing
 
-The latest local test run completed with **89 successful unit tests**.
+The latest local test run completed with **93 successful unit tests**.
 
     dotnet test TraineeTracker.UnitTests
 

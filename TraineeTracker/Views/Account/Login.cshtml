@@ -23,6 +23,11 @@
                 <button class="btn btn-primary" type="submit">Demo-Daten zurücksetzen</button>
             </form>
         </details>
+        @if (ViewData["SessionExpired"] is true)
+        {
+            <p class="message danger" role="alert">Das Anmeldeformular war abgelaufen oder konnte nicht geprüft werden.
+                Bitte melde dich erneut an. Erlaube dafür Cookies für diese Website.</p>
+        }
         <p class="login-sub">Melde dich mit deinen Zugangsdaten an.</p>
 
         <form asp-controller="Account" asp-action="Login" method="post" class="login-form" novalidate>

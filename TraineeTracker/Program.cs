@@ -18,7 +18,10 @@ if (!int.TryParse(port, out var portNumber) || portNumber is < 1 or > 65535)
 builder.WebHost.ConfigureKestrel(options => options.Limits.MaxRequestBodySize = 2 * 1024 * 1024);
 builder.WebHost.UseUrls($"http://0.0.0.0:{portNumber}");
 builder.Services.AddControllersWithViews(options =>
-    options.Filters.Add(new Microsoft.AspNetCore.Mvc.AutoValidateAntiforgeryTokenAttribute()));
+{
+    options.Filters.Add(new Microsoft.AspNetCore.Mvc.AutoValidateAntiforgeryTokenAttribute());
+    options.Filters.Add<TraineeTracker.Filters.LoginAntiforgeryRecoveryFilter>();
+});
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddSingleton<IDataProtectionProvider>(new EphemeralDataProtectionProvider());
 builder.Services.AddSingleton<DemoSessionStore>();

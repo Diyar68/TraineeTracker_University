@@ -78,7 +78,9 @@ def run_checks():
     check(anonymous.request("/TraineeDashboard")[0] == 302, "anonymous access denied")
     # Missing CSRF token must be rejected even with valid public credentials.
     code, _, _ = anonymous.request("/Account/Login", {"Email": "admin@demo.example", "Password": "AdminDemo!2026"})
-    check(code == 400, "CSRF required")
+    check(code == 302, "invalid login CSRF submission rejected with fresh-form redirect")
+    check(not any(cookie.name == "TraineeTracker.Auth" for cookie in anonymous.jar), "invalid CSRF does not authenticate")
+    check(anonymous.request("/TraineeDashboard")[0] == 302, "invalid CSRF cannot access dashboard")
     
     trainee = Browser()
     trainee.login("trainee")
